@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_theme">
+
+    <!-- topbar -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#141218"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txt_nameApp"
+            android:layout_width="406dp"
+            android:layout_height="72dp"
+            android:fontFamily="@font/jokeswild"
+            android:padding="5dp"
+            android:text="♣ POKER MANAGER ♣"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.51" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="1000dp"
+        android:layout_height="600dp"
+        android:alpha="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_app_bar"
+        app:layout_constraintVertical_bias="0.329"
+        app:srcCompat="@drawable/icon_rouded" />
+    <!-- topbar-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="376dp"
+        android:layout_height="565dp"
+        android:background="@color/transparent_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView14">
+
+        <Button
+            android:id="@+id/btn_start_game"
+            style="@style/front_buttons"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_buttons"
+            android:backgroundTintMode="multiply"
+            android:elevation="15dp"
+            android:text="Start Game"
+            app:layout_constraintBottom_toTopOf="@+id/btn_about"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_about"
+            style="@style/front_buttons"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_buttons"
+            android:backgroundTint="@null"
+            android:elevation="15dp"
+            android:text="About"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_quit"
+            style="@style/front_buttons"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:elevation="15dp"
+            android:background="@drawable/shape_buttons"
+            android:text="Quit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_about" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
