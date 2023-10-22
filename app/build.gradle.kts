@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.official.poker_manager"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.official.poker_manager"
