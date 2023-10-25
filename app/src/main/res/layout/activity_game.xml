@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jokeswild"
-            android:text="Game"
+            android:text="@string/game"
             android:textColor="@color/white"
             android:textSize="50sp"
             app:layout_constraintBottom_toBottomOf="parent"
