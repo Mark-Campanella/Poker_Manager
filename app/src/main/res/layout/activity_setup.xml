@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_start_match"
             style="@style/Buttons"
             android:layout_width="68dp"
             android:layout_height="54dp"
@@ -59,10 +59,10 @@
             android:id="@+id/imageView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="@+id/button"
-            app:layout_constraintStart_toStartOf="@+id/button"
-            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_start_match"
+            app:layout_constraintEnd_toEndOf="@+id/btn_start_match"
+            app:layout_constraintStart_toStartOf="@+id/btn_start_match"
+            app:layout_constraintTop_toTopOf="@+id/btn_start_match"
             app:srcCompat="@drawable/baseline_arrow_forward_24" />
 
         <ImageView
@@ -316,6 +316,7 @@
         app:layout_constraintEnd_toStartOf="@+id/switch_dark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_input_chips"
             android:layout_width="140dp"
             android:layout_height="53dp"
             android:text="@string/input"
@@ -335,6 +336,7 @@
         app:layout_constraintStart_toEndOf="@+id/switch_dark">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_input_big_blind"
             android:layout_width="140dp"
             android:layout_height="53dp"
             android:text="@string/input"
@@ -354,6 +356,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tgbtn_plus_minus">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_input_every"
             android:layout_width="140dp"
             android:layout_height="53dp"
             android:text="@string/input"
