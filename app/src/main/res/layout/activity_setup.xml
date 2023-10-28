@@ -23,7 +23,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="#141218"
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -209,12 +208,12 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="490dp"
+        android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@drawable/divider"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <!--Edit texts structures-->
@@ -224,12 +223,12 @@
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="3dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/divider"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -245,177 +244,142 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="15dp" />
 
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/table_sits" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/divider2">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="68dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText3"
-        app:layout_constraintEnd_toStartOf="@+id/editText3"
-        app:layout_constraintStart_toEndOf="@+id/editText1" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="82dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="76dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
 
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText10"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
 
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText9"
-        app:layout_constraintEnd_toEndOf="@+id/editText4"
-        app:layout_constraintStart_toStartOf="@+id/editText4" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="76dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/editText8"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/editText8"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editText7"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText6"
-        app:layout_constraintEnd_toStartOf="@+id/editText6"
-        app:layout_constraintStart_toEndOf="@+id/editText8" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    <EditText
-        android:id="@+id/editText8"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="304dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/editText1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText1"
-        app:layout_constraintTop_toBottomOf="@+id/editText1" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sits"></EditText>
 
-    <EditText
-        android:id="@+id/editText9"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="@+id/editText10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editText10"
-        app:layout_constraintTop_toBottomOf="@+id/editText10" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sits"></EditText>
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText10"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="380dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="82dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="80dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/table"></ImageView>
+            </LinearLayout>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sits"></EditText>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/sits"></EditText>
+            </LinearLayout>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+        </LinearLayout>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"></EditText>
+
+        </LinearLayout>
+    </LinearLayout>
+
 
     <!--Edit texts structures-->
 
