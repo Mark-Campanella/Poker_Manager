@@ -19,4 +19,10 @@
     <string name="multiplier" translatable="false">%1$d×</string>
     <string name="name">Name</string>
     <string name="game">Game</string>
+    <string name="creators">André Lisboa Augusto
+                            \nEdson Rodrigues da Cruz Filho
+                            \nMarcos Henrique Maimoni Campanella
+                            \nRodolfo Henrique Raymundo Engelmann
+                            \nVictor Probio Lopes</string>
+    <string name="description"></string>
 </resources>
