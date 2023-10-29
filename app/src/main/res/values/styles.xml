@@ -35,5 +35,7 @@
         <item name="android:textSize">30sp</item>
         <item name="autoSizeMaxTextSize">50sp</item>
         <item name="autoSizeMinTextSize">15sp</item>
+        <item name="android:includeFontPadding">true</item>
+        <item name="android:padding">5dp</item>
     </style>
 </resources>
