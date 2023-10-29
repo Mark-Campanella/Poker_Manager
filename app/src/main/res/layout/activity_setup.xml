@@ -287,8 +287,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:ems="10"
                 android:inputType="text" />
@@ -299,9 +297,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
+                android:layout_marginEnd="36dp"
                 android:background="@drawable/sits"
                 android:inputType="text" />
 
@@ -311,10 +307,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="36dp"
 
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:ems="10"
                 android:inputType="text" />
@@ -326,7 +320,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:inputType="text" />
         </LinearLayout>
@@ -405,8 +398,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:inputType="text" />
 
@@ -415,10 +406,8 @@
                 style="@style/NameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="36dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:inputType="text" />
 
@@ -427,10 +416,8 @@
                 style="@style/NameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="36dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:inputType="text" />
 
@@ -441,7 +428,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/sits"
                 android:inputType="text" />
 
