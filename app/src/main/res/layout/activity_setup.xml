@@ -19,7 +19,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/top_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="#141218"
@@ -223,7 +223,7 @@
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -245,138 +245,158 @@
         app:layout_constraintGuide_begin="15dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/divider2">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <EditText
+                android:id="@+id/editText1"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:ems="10"
+                android:inputType="text" />
 
             <EditText
+                android:id="@+id/editText10"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:inputType="text" />
 
             <EditText
+                android:id="@+id/editText9"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:ems="10"
+                android:inputType="text" />
 
+            <EditText
+                android:id="@+id/editText8"
+                style="@style/NameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/editText2"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/sits"></EditText>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/sits"></EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="0"
-                android:orientation="vertical">
+                android:background="@drawable/sits"
+                android:inputType="text" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:src="@drawable/table"></ImageView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="105dp"
+                android:layout_marginBottom="105dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:background="@null"
+                app:srcCompat="@drawable/table" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/sits"></EditText>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/sits"></EditText>
-            </LinearLayout>
-
+            <EditText
+                android:id="@+id/editText7"
+                style="@style/NameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="0"
+                android:background="@drawable/sits"
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <EditText
+                android:id="@+id/editText3"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:inputType="text" />
 
             <EditText
+                android:id="@+id/editText4"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:inputType="text" />
 
             <EditText
+                android:id="@+id/editText5"
+                style="@style/NameEditText"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/sits"></EditText>
+                android:background="@drawable/sits"
+                android:inputType="text" />
 
+            <EditText
+                android:id="@+id/editText6"
+                style="@style/NameEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/sits"
+                android:inputType="text" />
         </LinearLayout>
     </LinearLayout>
 

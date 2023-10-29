@@ -26,4 +26,14 @@
         <item name="android:textSize">35sp</item>
         <item name="android:textColor">#C6F1F4FF</item>
     </style>
+    <style name="NameEditText" parent="Widget.Material3.MaterialTimePicker.Display.TextInputEditText">
+        <item name="fontFamily">@font/jokeswild</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:hint">@string/name</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="autoSizeMaxTextSize">50sp</item>
+        <item name="autoSizeMinTextSize">15sp</item>
+    </style>
 </resources>
