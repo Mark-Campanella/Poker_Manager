@@ -1,14 +1,8 @@
 package com.official.poker_manager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -19,19 +13,12 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
 
 public class SetupActivity extends AppCompatActivity {
     // Mapa de assentos para os jogadores
-    private Hashtable<Integer, EditText> seatsMap = new Hashtable<Integer, EditText>(10);
-    // Botão de aumentar o multiplicador de blinds
-    private Button btnPlus;
-    // Botão de diminuir o multiplicador de blinds
-    private Button btnMinus;
+    private final Hashtable<Integer, EditText> seatsMap = new Hashtable<Integer, EditText>(10);
     // Texto do multiplicador de blinds
     private TextView txtMultiplier;
     // Valor do multiplicador de blinds
@@ -45,8 +32,6 @@ public class SetupActivity extends AppCompatActivity {
     private TextInputEditText txtBigBlind;
     // Texto de every
     private TextInputEditText txtEvery;
-    // Botão de iniciar o jogo
-    private Button btnStartMatch;
     // Versão do Android
     private int currentApiVersion;
     
@@ -68,7 +53,7 @@ public class SetupActivity extends AppCompatActivity {
         seatsMap.put(10, (EditText) findViewById(R.id.name10));
         
         // Atribui o botão de aumentar o multiplicador de blinds
-        btnPlus = findViewById(R.id.btn_plus);
+        Button btnPlus = findViewById(R.id.btn_plus);
         // Atribui o texto do multiplicador de blinds
         txtMultiplier = findViewById(R.id.txt_multiplier);
         // Exibe o valor do multiplicador de blinds
@@ -85,7 +70,7 @@ public class SetupActivity extends AppCompatActivity {
         });
         
         // Atribui o botão de diminuir o multiplicador de blinds
-        btnMinus = findViewById(R.id.btn_minus);
+        Button btnMinus = findViewById(R.id.btn_minus);
         // Diminui o multiplicador de blinds ao tocar no botão
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +95,10 @@ public class SetupActivity extends AppCompatActivity {
         txtEvery = findViewById(R.id.txt_input_every);
         
         // Atribui o botão de iniciar o jogo
-        btnStartMatch = findViewById(R.id.btn_start_match);
+        
+        // Botão de iniciar o jogo
+        Button btnStartMatch = findViewById(R.id.btn_start_match);
+        
         // Inicia a atividade de jogo ao tocar no botão
         btnStartMatch.setOnClickListener(new View.OnClickListener() {
             @Override
