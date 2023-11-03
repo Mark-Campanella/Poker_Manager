@@ -1,0 +1,26 @@
+♣ - Sobre o Jogo:
+
+♥ - Criadores:
+    André Lisboa Augusto
+    Edson Rodrigues da Cruz Filho
+    Marcos Henrique Maimoni Campanella
+    Rodolfo Henrique Raymundo Engelmann
+    Victor Probio Lopes
+
+♠ - Descrição:
+    Consiste em um simulador de apostas de Poker
+    (2-Hands-Poker, ou Poker clássico).
+    Sua função principal é auxiliar
+    no manejo do jogo, sem se preocupar
+    com as cartas em si.
+    Será possível determinar quantas
+    fichas cada jogador começa, qual
+    valor inicial do Big Blind,
+    se haverá aumentos em seu valor e,
+    se sim, a cada quantos turnos
+    ele será aumentado.
+    Dentro do jogo ele deverá gerenciar
+    as apostas (pot) automaticamente.
+
+♦ - Para mais informações:
+    (link do GitHub)
