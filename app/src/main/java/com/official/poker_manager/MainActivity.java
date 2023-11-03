@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btnAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
 
