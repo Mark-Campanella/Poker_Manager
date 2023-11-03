@@ -40,11 +40,13 @@
 
     <LinearLayout
         android:id="@+id/LinearAbout"
-        android:layout_width="340dp"
-        android:layout_height="551dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="40dp"
         android:background="@color/transparent_white"
         android:backgroundTint="#DDFFFFFF"
         android:elevation="20dp"
+        android:gravity="center|top"
         android:orientation="vertical"
         app:barrierMargin="@dimen/cardview_default_radius"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,13 +55,18 @@
         app:layout_constraintTop_toBottomOf="@+id/top_app_bar">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txt_about"
             android:layout_width="match_parent"
-            android:layout_height="124dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:elegantTextHeight="true"
             android:fontFamily="@font/jokeswild"
-            android:text="@string/creators"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

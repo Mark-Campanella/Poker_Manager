@@ -14,6 +14,6 @@
     <string name="about">Sobre</string>
     <string name="quit">Sair</string>
     <string name="setup">Setup</string>
-    <string name="name">Nome</string>
+    <string name="name">Nome do Jogador</string>
     <string name="game">Jogo</string>
 </resources>
