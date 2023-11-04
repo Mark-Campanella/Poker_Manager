@@ -3,10 +3,10 @@ package com.official.poker_manager;
 public class Player {
     // Nome do jogador
     private String name;
-    // Fichas do jogador
-    private int chips;
-    // Quantidade de fichas apostadas pelo jogador
-    private int currentBet;
+    // Total de fichas do jogador
+    private int chipsTotal;
+    // Quantidade de fichas apostadas pelo jogador na rodada atual
+    private int roundChipsBetted;
     // Se o jogador já está na partida ou não
     private boolean isPlaying;
     // Se o jogador dá as cartas
@@ -20,11 +20,11 @@ public class Player {
 
     // Getters e Setters
     public int getChips() {
-        return chips;
+        return chipsTotal;
     }
 
     public void setChips(int chips) {
-        this.chips = chips;
+        this.chipsTotal = chips;
     }
 
     public boolean isDealer() {
@@ -52,11 +52,11 @@ public class Player {
     }
     
     // Construtor
-    public Player(String name, int chips, boolean isPlaying) {
+    public Player(String name, int chipsTotal, boolean isPlaying) {
         this.name = name;
-        this.chips = chips;
+        this.chipsTotal = chipsTotal;
         this.isPlaying = isPlaying;
-        this.currentBet = 0;
+        this.roundChipsBetted = 0;
         this.isDealer = false;
         this.isSmallBlind = false;
         this.isBigBlind = false;
@@ -64,13 +64,11 @@ public class Player {
     }
     
     // Tira o jogador da rodada
-    public void Fold() {
-        this.isFolded = true;
-    }
+    public void fold() { this.isFolded = true; }
     
     // Aposta uma quantia
-    public void Bet(int amount) {
-        this.currentBet += amount;
-        this.chips -= this.currentBet;
+    public void bet(int amount) {
+        this.roundChipsBetted += amount;
+        this.chipsTotal -= amount;
     }
 }

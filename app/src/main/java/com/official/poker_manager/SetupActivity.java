@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 
 public class SetupActivity extends AppCompatActivity {
@@ -41,16 +42,16 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         
         // Mapeia os "assentos" ao número dos jogadores
-        seatsMap.put(1, (EditText) findViewById(R.id.name1));
-        seatsMap.put(2, (EditText) findViewById(R.id.name2));
-        seatsMap.put(3, (EditText) findViewById(R.id.name3));
-        seatsMap.put(4, (EditText) findViewById(R.id.name4));
-        seatsMap.put(5, (EditText) findViewById(R.id.name5));
-        seatsMap.put(6, (EditText) findViewById(R.id.name6));
-        seatsMap.put(7, (EditText) findViewById(R.id.name7));
-        seatsMap.put(8, (EditText) findViewById(R.id.name8));
-        seatsMap.put(9, (EditText) findViewById(R.id.name9));
-        seatsMap.put(10, (EditText) findViewById(R.id.name10));
+        seatsMap.put(0, (EditText) findViewById(R.id.name1));
+        seatsMap.put(1, (EditText) findViewById(R.id.name2));
+        seatsMap.put(2, (EditText) findViewById(R.id.name3));
+        seatsMap.put(3, (EditText) findViewById(R.id.name4));
+        seatsMap.put(4, (EditText) findViewById(R.id.name5));
+        seatsMap.put(5, (EditText) findViewById(R.id.name6));
+        seatsMap.put(6, (EditText) findViewById(R.id.name7));
+        seatsMap.put(7, (EditText) findViewById(R.id.name8));
+        seatsMap.put(8, (EditText) findViewById(R.id.name9));
+        seatsMap.put(9, (EditText) findViewById(R.id.name10));
         
         // Atribui o botão de aumentar o multiplicador de blinds
         Button btnPlus = findViewById(R.id.btn_plus);
@@ -117,7 +118,7 @@ public class SetupActivity extends AppCompatActivity {
                 
                 
                 // Declara o mapa de posições e jogadores
-                HashMap<Integer, Player> playerMap = new HashMap<Integer, Player>();
+                ArrayList<Player> players = new ArrayList<Player>(Collections.nCopies(10, null));
                 
                 // Itera sobre o mapa de posições
                 for (Hashtable.Entry<Integer, EditText> entry : seatsMap.entrySet()) {
@@ -129,12 +130,12 @@ public class SetupActivity extends AppCompatActivity {
                         Player player = new Player(name, chips, true);
                         
                         // Adiciona o jogador ao mapa de posições e jogadores
-                        playerMap.put(entry.getKey(), player);
+                        players.set(entry.getKey(), player);
                     }
                 }
                 
                 // Cria o jogo
-                Game game = new Game(playerMap, autoRaise, bigBlind, every, multiplier);
+                Game game = new Game(players, autoRaise, bigBlind, every, multiplier);
                 
                 // Inicia a atividade de jogo
                 // TODO: Passar o jogo como parâmetro após implementar o jogo
