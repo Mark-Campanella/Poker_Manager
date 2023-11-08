@@ -3,11 +3,13 @@ package com.official.poker_manager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -28,11 +30,11 @@ public class SetupActivity extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode") // Não sei o que isso faz, a IDE recomendou
     private Switch switchAutoRaise;
     // Texto de chips iniciais
-    private TextInputEditText txtChips;
+    private TextInputEditText edtxtChipsTotal;
     // Texto de big blind
-    private TextInputEditText txtBigBlind;
+    private TextInputEditText edtxtBigBlind;
     // Texto de every
-    private TextInputEditText txtEvery;
+    private TextInputEditText edtxtEvery;
     // Versão do Android
     private int currentApiVersion;
     
@@ -42,16 +44,16 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         
         // Mapeia os "assentos" ao número dos jogadores
-        seatsMap.put(0, (EditText) findViewById(R.id.name1));
-        seatsMap.put(1, (EditText) findViewById(R.id.name2));
-        seatsMap.put(2, (EditText) findViewById(R.id.name3));
-        seatsMap.put(3, (EditText) findViewById(R.id.name4));
-        seatsMap.put(4, (EditText) findViewById(R.id.name5));
-        seatsMap.put(5, (EditText) findViewById(R.id.name6));
-        seatsMap.put(6, (EditText) findViewById(R.id.name7));
-        seatsMap.put(7, (EditText) findViewById(R.id.name8));
-        seatsMap.put(8, (EditText) findViewById(R.id.name9));
-        seatsMap.put(9, (EditText) findViewById(R.id.name10));
+        seatsMap.put(0, (EditText) findViewById(R.id.seat_0));
+        seatsMap.put(1, (EditText) findViewById(R.id.seat_1));
+        seatsMap.put(2, (EditText) findViewById(R.id.seat_2));
+        seatsMap.put(3, (EditText) findViewById(R.id.seat_3));
+        seatsMap.put(4, (EditText) findViewById(R.id.seat_4));
+        seatsMap.put(5, (EditText) findViewById(R.id.seat_5));
+        seatsMap.put(6, (EditText) findViewById(R.id.seat_6));
+        seatsMap.put(7, (EditText) findViewById(R.id.seat_7));
+        seatsMap.put(8, (EditText) findViewById(R.id.seat_8));
+        seatsMap.put(9, (EditText) findViewById(R.id.seat_9));
         
         // Atribui o botão de aumentar o multiplicador de blinds
         Button btnPlus = findViewById(R.id.btn_plus);
@@ -84,21 +86,19 @@ public class SetupActivity extends AppCompatActivity {
         });
         
         // Atribui o switch de auto raise
-        switchAutoRaise = findViewById(R.id.switch_dark);
+        switchAutoRaise = findViewById(R.id.switch_auto_raise);
         
         // Atribui o texto de chips iniciais
-        txtChips = findViewById(R.id.txt_input_chips);
+        edtxtChipsTotal = findViewById(R.id.edtxt_chips_total);
         
         // Atribui o texto de big blind
-        txtBigBlind = findViewById(R.id.txt_input_big_blind);
+        edtxtBigBlind = findViewById(R.id.edtxt_big_blind);
         
         // Atribui o texto de "every"
-        txtEvery = findViewById(R.id.txt_input_every);
-        
-        // Atribui o botão de iniciar o jogo
+        edtxtEvery = findViewById(R.id.edtxt_every);
         
         // Botão de iniciar o jogo
-        Button btnStartMatch = findViewById(R.id.btn_start_match);
+        ImageButton btnStartMatch = findViewById(R.id.btn_start_match);
         
         // Inicia a atividade de jogo ao tocar no botão
         btnStartMatch.setOnClickListener(new View.OnClickListener() {
@@ -108,14 +108,13 @@ public class SetupActivity extends AppCompatActivity {
                 boolean autoRaise = switchAutoRaise.isActivated();
                 
                 // Pega o valor das fichas
-                int chips = Integer.parseInt(txtChips.getText().toString());
+                int chipsTotal = Integer.parseInt(edtxtChipsTotal.getText().toString());
                 
                 // Pega o valor da big blind
-                int bigBlind = Integer.parseInt(txtBigBlind.getText().toString());
+                int bigBlind = Integer.parseInt(edtxtBigBlind.getText().toString());
                 
                 // Pega o valor do every
-                int every = Integer.parseInt(txtEvery.getText().toString());
-                
+                int every = Integer.parseInt(edtxtEvery.getText().toString());
                 
                 // Declara o mapa de posições e jogadores
                 ArrayList<Player> players = new ArrayList<Player>(Collections.nCopies(10, null));
@@ -127,7 +126,7 @@ public class SetupActivity extends AppCompatActivity {
                         String name = entry.getValue().getText().toString();
                         
                         // Cria o jogador
-                        Player player = new Player(name, chips, true);
+                        Player player = new Player(name, chipsTotal, true);
                         
                         // Adiciona o jogador ao mapa de posições e jogadores
                         players.set(entry.getKey(), player);
@@ -136,10 +135,9 @@ public class SetupActivity extends AppCompatActivity {
                 
                 // Cria o jogo
                 Game game = new Game(players, autoRaise, bigBlind, every, multiplier);
-                
+
                 // Inicia a atividade de jogo
-                // TODO: Passar o jogo como parâmetro após implementar o jogo
-                //startActivity(new Intent(SetupActivity.this, GameActivity.class).putExtra("game", game));
+                startActivity(new Intent(SetupActivity.this, GameActivity.class).putExtra("game", game));
             }
         });
         
