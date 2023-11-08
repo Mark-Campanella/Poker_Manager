@@ -2,10 +2,11 @@ package com.official.poker_manager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game {
+public class Game implements Serializable {
     // Lista circular para jogadores
     private Table table;
 
