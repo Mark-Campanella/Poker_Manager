@@ -2,6 +2,7 @@ package com.official.poker_manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class GameActivity extends AppCompatActivity {
@@ -12,7 +13,11 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // Pegar dados do setup usando o Intent e passar para o construtor de game
+        // Recuperando o objeto Game criado em SetupActivity
+        if(getIntent().getExtras() != null) {
+            game = (Game) getIntent().getSerializableExtra("game");
+        }
+
         //Criar o map de jogadores também com base no Intent de Setup
 
         //game = new Game();
