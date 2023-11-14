@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginBottom="40dp"
+                android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/editTextText9"
                 app:layout_constraintHorizontal_bias="0.533"
@@ -48,9 +49,10 @@
                 app:layout_constraintVertical_bias="0.486" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txt_pot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 android:fontFamily="@font/jokeswild"
                 android:text="Pot:  0"
                 android:textAlignment="center"
@@ -68,6 +70,7 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.501"
@@ -82,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="40dp"
+                android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -95,6 +99,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/seat_vector"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextText11"
@@ -106,6 +111,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextText3"
@@ -118,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/seat_vector"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -133,6 +140,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="50dp"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -148,6 +156,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="50dp"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText1"
                 app:layout_constraintEnd_toStartOf="@+id/editTextText2"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -161,6 +170,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText7"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -174,6 +184,7 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -190,83 +201,88 @@
                 app:layout_constraintGuide_begin="252dp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/txt_hands"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/jokeswild"
                 android:text="HANDS:  0"
                 android:textAppearance="@style/Texts"
                 android:textSize="34sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+                app:layout_constraintBaseline_toBaselineOf="@+id/txt_pot"
                 app:layout_constraintEnd_toEndOf="@+id/editTextText10"
                 app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toStartOf="@+id/editTextText10" />
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="71dp"
-                android:layout_height="98dp"
+                android:id="@+id/card_1"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="15dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_2"
+                app:layout_constraintEnd_toStartOf="@+id/card_2"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/card_2"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/carta_espadas_vector" />
+                app:srcCompat="@drawable/abstract_gambling_vintage_poster_153969_619" />
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="69dp"
-                android:layout_height="98dp"
-                android:layout_marginStart="7dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView5"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/carta_espadas_vector" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="73dp"
-                android:layout_height="98dp"
-                android:layout_marginStart="7dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-                app:layout_constraintEnd_toStartOf="@+id/imageView6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView6"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/carta_espadas_vector" />
-
-            <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/card_3"
                 android:layout_width="70dp"
-                android:layout_height="98dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="7dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_4"
+                app:layout_constraintEnd_toStartOf="@+id/card_4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/card_2"
+                app:layout_constraintTop_toTopOf="@+id/card_4"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/abstract_gambling_vintage_poster_153969_619" />
+
+            <ImageView
+                android:id="@+id/card_4"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="7dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_6"
+                app:layout_constraintEnd_toStartOf="@+id/card_6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/card_3"
+                app:layout_constraintTop_toTopOf="@+id/card_6"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/abstract_gambling_vintage_poster_153969_619" />
+
+            <ImageView
+                android:id="@+id/card_6"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="49dp"
+                android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/editTextText3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toEndOf="@+id/card_4"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/carta_espadas_vector" />
+                app:srcCompat="@drawable/abstract_gambling_vintage_poster_153969_619" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/card_2"
                 android:layout_width="70dp"
-                android:layout_height="99dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="6dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_3"
+                app:layout_constraintEnd_toStartOf="@+id/card_3"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/card_1"
+                app:layout_constraintTop_toTopOf="@+id/card_3"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/carta_espadas_vector" />
+                app:srcCompat="@drawable/abstract_gambling_vintage_poster_153969_619" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
@@ -308,14 +324,14 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/tgbtn_plus_minus"
+            android:id="@+id/tgbtn_bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:gravity="center">
 
             <Button
-                android:id="@+id/btn_plus"
+                android:id="@+id/btn_check"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
@@ -332,7 +348,7 @@
                 app:strokeWidth="2dp"></Button>
 
             <Button
-                android:id="@+id/btn_minus"
+                android:id="@+id/btn_raise"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
@@ -348,7 +364,7 @@
                 app:strokeWidth="2dp"></Button>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_fold"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="50"

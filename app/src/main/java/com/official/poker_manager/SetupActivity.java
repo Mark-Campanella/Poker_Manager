@@ -3,14 +3,19 @@ package com.official.poker_manager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 public class SetupActivity extends AppCompatActivity {
     // Versão da API do Android
     private int currentApiVersion;
 
+    //botao para a proxima pagina
+    private ImageButton btn_next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,14 @@ public class SetupActivity extends AppCompatActivity {
                 }
             });
         }
+        btn_next = findViewById(R.id.next_button);
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SetupActivity.this, GameActivity.class));
+            }
+        });
+
     }
 
     // Também retirado de https://stackoverflow.com/questions/21724420/how-to-hide-navigation-bar-permanently-in-android-activity
@@ -64,5 +77,6 @@ public class SetupActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
 }
 
