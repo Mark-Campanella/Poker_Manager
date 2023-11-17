@@ -4,7 +4,6 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Game implements Serializable {
     // Lista circular para jogadores
@@ -99,12 +98,6 @@ public class Game implements Serializable {
     }
 
     public void fold()
-    {
-        //playerMap.get(focusedPlayerID).fold();
-
-    }
-
-    private void setNextPlayer()
     {
 
     }
