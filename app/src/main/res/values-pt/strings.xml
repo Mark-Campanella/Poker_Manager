@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">PokerManager</string>
     <string name="chips">Fichas</string>
+    <string name="chips_game">Fichas: 500</string>
     <string name="input">Entrada</string>
     <string name="every">A cada?</string>
     <string name="auto_raise">Aumentar Automaticamente?</string>
@@ -16,4 +17,5 @@
     <string name="setup">Configuração</string>
     <string name="name">Nome</string>
     <string name="game">Jogo</string>
+    <string name="bet_game">Aposta: 0</string>
 </resources>

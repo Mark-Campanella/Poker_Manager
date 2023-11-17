@@ -5,8 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_theme"
+    android:backgroundTintMode="multiply"
     android:clickable="false"
     tools:context=".GameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -40,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginBottom="40dp"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/sit_0"
@@ -63,13 +71,14 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/sit_9"
                 app:layout_constraintTop_toBottomOf="@+id/sit_9"
-                app:layout_constraintVertical_bias="0.503" />
+                app:layout_constraintVertical_bias="0.827" />
 
             <EditText
                 android:id="@+id/sit_0"
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="40dp"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +109,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/sit_vector"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +122,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,8 +134,9 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="200dp"
                 android:background="@drawable/sit_vector"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_0"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +152,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="200dp"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,8 +169,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="200dp"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
+                android:shadowColor="#FFFFFF"
+                android:shadowDx="20"
                 app:layout_constraintBottom_toTopOf="@+id/sit_9"
                 app:layout_constraintEnd_toStartOf="@+id/sit_5"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -170,6 +187,8 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:backgroundTintMode="multiply"
+                android:clickable="false"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_8"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -184,6 +203,7 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:backgroundTintMode="multiply"
                 android:editable="false"
                 app:layout_constraintBottom_toTopOf="@+id/sit_9"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -210,13 +230,13 @@
                 android:textSize="34sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txt_pot"
                 app:layout_constraintEnd_toEndOf="@+id/sit_1"
-                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintHorizontal_bias="0.291"
                 app:layout_constraintStart_toStartOf="@+id/sit_1" />
 
             <ImageView
                 android:id="@+id/card_1"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="15dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/card_2"
@@ -229,8 +249,8 @@
 
             <ImageView
                 android:id="@+id/card_3"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="7dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/card_4"
@@ -243,8 +263,8 @@
 
             <ImageView
                 android:id="@+id/card_4"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="7dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/card_6"
@@ -257,11 +277,11 @@
 
             <ImageView
                 android:id="@+id/card_6"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginBottom="49dp"
+                android:layout_marginBottom="30dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/sit_4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -272,8 +292,8 @@
 
             <ImageView
                 android:id="@+id/card_2"
-                android:layout_width="70dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="6dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/card_3"
@@ -283,6 +303,513 @@
                 app:layout_constraintTop_toTopOf="@+id/card_3"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/back_card" />
+
+            <LinearLayout
+                android:id="@+id/ll7"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_8"
+                app:layout_constraintEnd_toEndOf="@+id/sit_7"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_7"
+                app:layout_constraintTop_toBottomOf="@+id/sit_7"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_7"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_7"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_7"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_3"
+                app:layout_constraintTop_toBottomOf="@+id/sit_3"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_3"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_3"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_3"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center"
+                    android:text="@string/role_big_blind" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_1"
+                app:layout_constraintEnd_toEndOf="@+id/sit_2"
+                app:layout_constraintStart_toStartOf="@+id/sit_2"
+                app:layout_constraintTop_toBottomOf="@+id/sit_2"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_2"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_2"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_2"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll9"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/txt_pot"
+                app:layout_constraintEnd_toEndOf="@+id/sit_9"
+                app:layout_constraintHorizontal_bias="0.414"
+                app:layout_constraintStart_toStartOf="@+id/sit_9"
+                app:layout_constraintTop_toBottomOf="@+id/sit_9"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_9"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_9"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_9"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/txt_hands"
+                app:layout_constraintEnd_toEndOf="@+id/sit_1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_1"
+                app:layout_constraintTop_toBottomOf="@+id/sit_1"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_1"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_1"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_1"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll5"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="@+id/sit_5"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_5"
+                app:layout_constraintTop_toBottomOf="@+id/sit_5"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_5"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_5"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_5"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center"
+                    android:text="@string/role_dealer" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_3"
+                app:layout_constraintEnd_toEndOf="@+id/sit_4"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_4"
+                app:layout_constraintTop_toBottomOf="@+id/sit_4"
+                app:layout_constraintVertical_bias="0.0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_4"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_4"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_4"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center"
+                    android:text="@string/role_small_blind" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll8"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_9"
+                app:layout_constraintEnd_toEndOf="@+id/sit_8"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_8"
+                app:layout_constraintTop_toBottomOf="@+id/sit_8"
+                app:layout_constraintVertical_bias="0.09">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_8"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_8"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_8"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll6"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sit_7"
+                app:layout_constraintEnd_toEndOf="@+id/sit_6"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_6"
+                app:layout_constraintTop_toBottomOf="@+id/sit_6"
+                app:layout_constraintVertical_bias="0.09">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_6"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_6"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_6"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll0"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/txt_pot"
+                app:layout_constraintEnd_toEndOf="@+id/sit_0"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/sit_0"
+                app:layout_constraintTop_toBottomOf="@+id/sit_0"
+                app:layout_constraintVertical_bias="0.1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_chips_0"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/chips_game" />
+
+                    <TextView
+                        android:id="@+id/txt_bet_0"
+                        style="@style/info_TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/txt_border"
+                        android:padding="2dp"
+                        android:text="@string/bet_game" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_role_0"
+                    style="@style/info_TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/txt_border"
+                    android:gravity="center" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

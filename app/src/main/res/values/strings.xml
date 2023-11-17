@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PokerManager</string>
     <string name="chips">Chips</string>
+    <string name="chips_game">Chips: 0</string>
     <string name="input">Input</string>
     <string name="big_blind" translatable="false">Big Blind</string>
     <string name="every">Every?</string>
@@ -19,4 +20,8 @@
     <string name="multiplier" translatable="false">%1$d×</string>
     <string name="name">Name</string>
     <string name="game">Game</string>
+    <string name="bet_game">Bet: 0</string>
+    <string name="role_dealer" translatable="false">Dealer</string>
+    <string name="role_big_blind" translatable="false">Big Blind</string>
+    <string name="role_small_blind" translatable="false">Small Blind</string>
 </resources>
