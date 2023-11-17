@@ -22,14 +22,17 @@
 
         <TextView
             android:id="@+id/txt_nameApp"
-            android:layout_width="406dp"
-            android:layout_height="72dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/jokeswild"
             android:padding="5dp"
             android:text="@string/app_title"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -37,12 +40,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.51" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView14"
-        android:layout_width="1000dp"
-        android:layout_height="600dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:alpha="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,10 +66,10 @@
     <!-- topbar-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="376dp"
-        android:layout_height="565dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/transparent_white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView14">
