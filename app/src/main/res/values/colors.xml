@@ -3,4 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent_white">#19FFFFFF</color>
+    <color name="checked">#00C853</color>
+    <color name="raised">#D50000</color>
+    <color name="folded">#304FFE</color>
+    <color name="out">#AA00FF</color>
+    <color name="turn">#FFFF6D00</color>
+    <color name="in">#2B2B2B</color>
+
 </resources>

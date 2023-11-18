@@ -11,7 +11,7 @@ import java.util.Hashtable;
 
 public class GameActivity extends AppCompatActivity {
     private Game game;
-    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10)
+    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10);
     private class SeatViews
     {
         public EditText edtxtPlayerName;
