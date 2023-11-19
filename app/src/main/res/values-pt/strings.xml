@@ -18,4 +18,5 @@
     <string name="name">Nome</string>
     <string name="game">Jogo</string>
     <string name="bet_game">Aposta: 0</string>
+    <string name="value">Valor</string>
 </resources>
