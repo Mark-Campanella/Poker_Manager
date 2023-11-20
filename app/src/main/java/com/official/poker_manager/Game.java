@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class Game implements Serializable {
     // Lista circular para jogadores
-    public Table table;
+    private Table table;
 
-    private class Table implements Serializable
+    public class Table implements Serializable
     {
         private ArrayList<Player> players;
         private int focusedPlayerID;
@@ -19,6 +19,8 @@ public class Game implements Serializable {
             this.players = players;
             this.focusedPlayerID = 0;
         }
+
+        public ArrayList<Player> getPlayers() { return players; }
 
         public void addPlayer(int playerID, Player player)
         {
@@ -49,8 +51,6 @@ public class Game implements Serializable {
         }
     }
 
-    // Jogado em foco
-    private int focusedPlayerID;
     // Se aumenta os blinds
     private boolean autoRaise;
     // Quantidade inicial da "big blind"
@@ -59,7 +59,10 @@ public class Game implements Serializable {
     private int every;
     // Multiplicador da "big blind"
     private float multiplier;
+    // Quantidade apostada na rodada
+    private int tableBet;
 
+    // Getters e Setters
     public int getTableBet() {
         return tableBet;
     }
@@ -68,9 +71,6 @@ public class Game implements Serializable {
         this.tableBet = tableBet;
     }
 
-    private int tableBet;
-    
-    // Getters e Setters
     public boolean isAutoRaise() {
         return autoRaise;
     }
@@ -78,6 +78,8 @@ public class Game implements Serializable {
     public int getEvery() {
         return every;
     }
+
+    public Table getTable() { return table; }
 
     public float getMultiplier() {
         return multiplier;

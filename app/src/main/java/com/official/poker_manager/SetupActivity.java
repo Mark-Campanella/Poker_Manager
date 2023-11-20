@@ -29,7 +29,7 @@ public class SetupActivity extends AppCompatActivity {
     // Valor do multiplicador de blinds
     private float multiplier = 1.5f;
     // Switch de auto raise
-    @SuppressLint("UseSwitchCompatOrMaterialCode") // Não sei o que isso faz, a IDE recomendou
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch switchAutoRaise;
     // Texto de chips iniciais
     private TextInputEditText edtxtChipsTotal;

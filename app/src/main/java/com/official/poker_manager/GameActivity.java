@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class GameActivity extends AppCompatActivity {
@@ -29,13 +30,30 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         // Recuperando o objeto Game criado em SetupActivity
-        if (getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null)
+        {
             game = (Game) getIntent().getSerializableExtra("game");
         }
 
-        for (int i = 0; i < 10; i++) {
-            //seatViewsMap.put(i, new SeatViews());
-            //seatViewsMap.get(i).edtxtPlayerName = game.getPlayers ?
+        // Faz o bind de todas as views
+        for(int i = 0; i < 10; i++)
+        {
+            seatViewsMap.put(i, new SeatViews());
+            seatViewsMap.get(i).edtxtPlayerName = findViewById(getResources().getIdentifier("seat_" + String.valueOf(i), "id", getPackageName()));
+            seatViewsMap.get(i).txtChipsTotal = findViewById(getResources().getIdentifier("txt_chips_" + String.valueOf(i), "id", getPackageName()));
+            seatViewsMap.get(i).txtRoundChipsBetted = findViewById(getResources().getIdentifier("txt_bet_" + String.valueOf(i), "id", getPackageName()));
+            seatViewsMap.get(i).txtRoundRole = findViewById(getResources().getIdentifier("txt_role_" + String.valueOf(i), "id", getPackageName()));
+        }
+
+        ArrayList<Player> players = game.getTable().getPlayers();
+        // Inicialização das views com os valores
+        for(int i = 0; i < 10; i++)
+        {
+            if(players.get(i) != null)
+            {
+                seatViewsMap.get(i).edtxtPlayerName.setText((CharSequence) players.get(i).getName());
+                seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
+            }
         }
         
         // Botão de call ou check
@@ -75,6 +93,5 @@ public class GameActivity extends AppCompatActivity {
             DialogFragment dialog = new raiseDialog();
             dialog.show(getSupportFragmentManager(), "Raise");
         });
-        
     }
 }

@@ -52,7 +52,9 @@ public class Player implements Serializable {
     public void setBigBlind(boolean bigBlind) {
         isBigBlind = bigBlind;
     }
-    
+
+    public String getName() { return name; }
+
     // Construtor
     public Player(String name, int chipsTotal, boolean isPlaying) {
         this.name = name;
