@@ -8,10 +8,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,11 +34,22 @@ public class SetupActivity extends AppCompatActivity {
     // Texto de chips iniciais
     private TextInputEditText edtxtChipsTotal;
     // Texto de big blind
-    private TextInputEditText edtxtBigBlind;
+    private TextInputEditText edtxtBlind;
     // Texto de every
     private TextInputEditText edtxtEvery;
     // Versão do Android
     private int currentApiVersion;
+
+    public void debugFlamengo()
+    {
+        Toast.makeText(getApplicationContext(), "FLAMENGO", Toast.LENGTH_LONG).show();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +89,7 @@ public class SetupActivity extends AppCompatActivity {
         Button btnMinus = findViewById(R.id.btn_minus);
         // Diminui o multiplicador de blinds ao tocar no botão
         btnMinus.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View v) {
                 if (multiplier > 1.0f) {
@@ -87,12 +101,33 @@ public class SetupActivity extends AppCompatActivity {
         
         // Atribui o switch de auto raise
         switchAutoRaise = findViewById(R.id.switch_auto_raise);
-        
+        // Desabilita ou habilita as views relacionadas com o auto raise
+        switchAutoRaise.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if(isChecked)
+                {
+                    edtxtEvery.setEnabled(true);
+                    btnPlus.setEnabled(true);
+                    btnMinus.setEnabled(true);
+                    txtMultiplier.setEnabled(true);
+                }
+                else
+                {
+                    edtxtEvery.setEnabled(false);
+                    btnPlus.setEnabled(false);
+                    btnMinus.setEnabled(false);
+                    txtMultiplier.setEnabled(false);
+                }
+            }
+        });
+
         // Atribui o texto de chips iniciais
         edtxtChipsTotal = findViewById(R.id.edtxt_chips_total);
         
         // Atribui o texto de big blind
-        edtxtBigBlind = findViewById(R.id.edtxt_big_blind);
+        edtxtBlind = findViewById(R.id.edtxt_big_blind);
         
         // Atribui o texto de "every"
         edtxtEvery = findViewById(R.id.edtxt_every);
@@ -105,32 +140,68 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Pega o valor do switch
-                boolean autoRaise = switchAutoRaise.isActivated();
-                
+                boolean autoRaise = switchAutoRaise.isChecked();
+
+                // Verifica se os campos númericos não estão vazios
+                if(edtxtChipsTotal.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Adicione um valor total de fichas", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(edtxtBlind.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Adicione um valor para o blind", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(autoRaise && edtxtEvery.getText().toString().isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(), "Adicione um valor de every", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 // Pega o valor das fichas
                 int chipsTotal = Integer.parseInt(edtxtChipsTotal.getText().toString());
                 
                 // Pega o valor da big blind
-                int bigBlind = Integer.parseInt(edtxtBigBlind.getText().toString());
+                int bigBlind = Integer.parseInt(edtxtBlind.getText().toString());
                 
                 // Pega o valor do every
-                int every = Integer.parseInt(edtxtEvery.getText().toString());
-                
+                int every = 0;
+                if(autoRaise)
+                {
+                    every = Integer.parseInt(edtxtEvery.getText().toString());
+                }
+
                 // Declara o mapa de posições e jogadores
                 ArrayList<Player> players = new ArrayList<Player>(Collections.nCopies(10, null));
-                
+
                 // Itera sobre o mapa de posições
-                for (Hashtable.Entry<Integer, EditText> entry : seatsMap.entrySet()) {
-                    if (!entry.getValue().getText().toString().equals("")) {
+                int numPlayers = 0;
+                for(int i = 0; i < 10; i++)
+                {
+                    TextView seat = seatsMap.get(i);
+
+                    if(!seat.getText().toString().isEmpty())
+                    {
                         // Pega o nome do jogador
-                        String name = entry.getValue().getText().toString();
+                        String name = seat.getText().toString();
                         
                         // Cria o jogador
                         Player player = new Player(name, chipsTotal, true);
                         
                         // Adiciona o jogador ao mapa de posições e jogadores
-                        players.set(entry.getKey(), player);
+                        players.set(i, player);
+
+                        numPlayers++;
                     }
+                }
+
+                if(numPlayers < 2)
+                {
+                    Toast.makeText(getApplicationContext(), "Adicione ao menos dois jogadores", Toast.LENGTH_LONG).show();
+                    return;
                 }
                 
                 // Cria o jogo
