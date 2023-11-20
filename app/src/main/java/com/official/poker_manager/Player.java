@@ -1,6 +1,8 @@
 package com.official.poker_manager;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     // Nome do jogador
     private String name;
     // Total de fichas do jogador

@@ -9,7 +9,8 @@ public class Game implements Serializable {
     // Lista circular para jogadores
     private Table table;
 
-    private class Table {
+    private class Table implements Serializable
+    {
         private ArrayList<Player> players;
         private int focusedPlayerID;
 
