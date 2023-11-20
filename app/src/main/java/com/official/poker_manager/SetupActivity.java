@@ -44,16 +44,16 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         
         // Mapeia os "assentos" ao número dos jogadores
-        seatsMap.put(0, (EditText) findViewById(R.id.sit_0));
-        seatsMap.put(1, (EditText) findViewById(R.id.sit_1));
-        seatsMap.put(2, (EditText) findViewById(R.id.sit_2));
-        seatsMap.put(3, (EditText) findViewById(R.id.sit_3));
-        seatsMap.put(4, (EditText) findViewById(R.id.sit_4));
-        seatsMap.put(5, (EditText) findViewById(R.id.sit_5));
-        seatsMap.put(6, (EditText) findViewById(R.id.sit_6));
-        seatsMap.put(7, (EditText) findViewById(R.id.sit_7));
-        seatsMap.put(8, (EditText) findViewById(R.id.sit_8));
-        seatsMap.put(9, (EditText) findViewById(R.id.sit_9));
+        seatsMap.put(0, (EditText) findViewById(R.id.seat_0));
+        seatsMap.put(1, (EditText) findViewById(R.id.seat_1));
+        seatsMap.put(2, (EditText) findViewById(R.id.seat_2));
+        seatsMap.put(3, (EditText) findViewById(R.id.seat_3));
+        seatsMap.put(4, (EditText) findViewById(R.id.seat_4));
+        seatsMap.put(5, (EditText) findViewById(R.id.seat_5));
+        seatsMap.put(6, (EditText) findViewById(R.id.seat_6));
+        seatsMap.put(7, (EditText) findViewById(R.id.seat_7));
+        seatsMap.put(8, (EditText) findViewById(R.id.seat_8));
+        seatsMap.put(9, (EditText) findViewById(R.id.seat_9));
         
         // Atribui o botão de aumentar o multiplicador de blinds
         Button btnPlus = findViewById(R.id.btn_plus);
