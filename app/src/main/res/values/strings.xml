@@ -3,27 +3,27 @@
     <string name="chips">Chips</string>
     <string name="chips_game">Chips: 0</string>
     <string name="input">Input</string>
-    <string name="big_blind" translatable="false">Big Blind</string>
+    <string name="big_blind">Big Blind</string>
     <string name="every">Every?</string>
     <string name="auto_raise">Auto Raise?</string>
     <string name="hands">Hands</string>
     <string name="minutes">Minutes</string>
     <string name="start">Start</string>
     <string name="player_name">Player Name</string>
-    <string name="ok" translatable="false">OK</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="start_game">Start Game</string>
-    <string name="app_title" translatable="false">♣ POKER MANAGER ♣</string>
+    <string name="app_title">♣ POKER MANAGER ♣</string>
     <string name="about">About</string>
     <string name="quit">Quit</string>
     <string name="setup">Setup</string>
-    <string name="multiplier" translatable="false">%1$d×</string>
+    <string name="multiplier">%1$d×</string>
     <string name="name">Name</string>
     <string name="game">Game</string>
     <string name="bet_game">Bet: 0</string>
-    <string name="role_dealer" translatable="false">Dealer</string>
-    <string name="role_big_blind" translatable="false">Big Blind</string>
-    <string name="role_small_blind" translatable="false">Small Blind</string>
+    <string name="role_dealer">Dealer</string>
+    <string name="role_big_blind">Big Blind</string>
+    <string name="role_small_blind">Small Blind</string>
     <string name="value">Value</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
