@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,11 +55,24 @@ public class GameActivity extends AppCompatActivity {
         btnRaise.setOnClickListener(v -> {
             ValueViewModel viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
             viewModel.getValue().observe(this, value -> {
-                game.raise(value);
+                // TODO: descomentar o código abaixo quando o raise for implementado
+                // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
+                //if (value >= this.game.table.bet + 1 && value <= game.table.getFocusedPlayer().getChips())
+                    game.raise(value);
+                // Se for -1, é all-in
+                //else if (value == -1)
+                    //game.raise(game.table.getFocusedPlayer().getChips());
+                // Senão, é um valor inválido e exibe um AlertDialog
+                //else
+                    //new AlertDialog.Builder(this)
+                            //.setTitle("Valor inválido")
+                            //.setMessage("Valor de aposta inválido!")
+                            //.setPositiveButton("OK", null)
+                            //.show();
             });
             
             // Exibir um pop-up para o usuário digitar o valor do raise
-            DialogFragment dialog = new InputValueDialog();
+            DialogFragment dialog = new raiseDialog();
             dialog.show(getSupportFragmentManager(), "Raise");
         });
         

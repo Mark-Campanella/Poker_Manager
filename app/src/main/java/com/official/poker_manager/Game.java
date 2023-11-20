@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Game implements Serializable {
     // Lista circular para jogadores
-    private Table table;
+    public Table table;
 
     private class Table implements Serializable
     {

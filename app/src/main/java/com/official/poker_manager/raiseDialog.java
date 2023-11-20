@@ -6,12 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 /*
@@ -21,7 +18,7 @@ Principalmente as partes de código com comentários em inglês
 Fragmento que exibe um diálogo para o usuário digitar um valor
 */
 
-public class InputValueDialog extends DialogFragment {
+public class raiseDialog extends DialogFragment {
     
     // ViewModel para passar o valor digitado pelo usuário
     private ValueViewModel viewModel;
@@ -33,7 +30,9 @@ public class InputValueDialog extends DialogFragment {
 
         // Inflate and set the layout for the dialog.
         // Pass null as the parent view because it's going in the dialog layout.
-        builder.setView(inflater.inflate(R.layout.dialog_input_value, null))
+        builder.setView(inflater.inflate(R.layout.dialog_raise, null))
+                // Adiciona um título
+                .setTitle(R.string.raise)
                 // Add action buttons.
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -44,9 +43,17 @@ public class InputValueDialog extends DialogFragment {
                         viewModel.setValue(Integer.parseInt(edtxtValue.getText().toString()));
                     }
                 })
+                .setNeutralButton(R.string.all_in, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Retorna flag de all-in
+                        viewModel = new ViewModelProvider(requireActivity()).get(ValueViewModel.class);
+                        viewModel.setValue(-1);
+                    }
+                })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        InputValueDialog.this.getDialog().cancel();
+                        raiseDialog.this.getDialog().cancel();
                     }
                 });
         
