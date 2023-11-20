@@ -58,6 +58,16 @@ public class Game implements Serializable {
     private int every;
     // Multiplicador da "big blind"
     private float multiplier;
+
+    public int getTableBet() {
+        return tableBet;
+    }
+
+    public void setTableBet(int apostaMesa) {
+        this.tableBet = tableBet;
+    }
+
+    private int tableBet;
     
     // Getters e Setters
     public boolean isAutoRaise() {
@@ -79,6 +89,7 @@ public class Game implements Serializable {
         this.bigBlind = bigBlind;
         this.every = every;
         this.multiplier = multiplier;
+        this.tableBet = 0;
     }
 
     public void startGame()
@@ -87,18 +98,33 @@ public class Game implements Serializable {
         // Setar outras informações necessaŕias para iniciar o game
     }
 
-    public void call()
-    {
-
+    public void nextRound(){
+        //mudar a rodada do jogo
     }
 
-    public void raise()
-    {
-
+    //Função referente a situação de quando a aposta da mesa é 0 (check)
+    // ou diferente de 0 (Call)
+    public void call(){
+        Player moment;
+        moment = table.getFocusedPlayer();
+        moment.bet(tableBet);
+        table.nextPlayer();
+    }
+    //Função para aumentar a aposta da rodada
+    public void raise(int bet){
+        Player moment;
+        moment = table.getFocusedPlayer();
+        bet = bet + tableBet;
+        tableBet = bet;
+        moment.bet(bet);
+        table.nextPlayer();
     }
 
-    public void fold()
-    {
-
+    //Função para sair do rodada
+    public void fold() {
+        Player moment;
+        moment = table.getFocusedPlayer();
+        moment.fold();
+        table.nextPlayer();
     }
 }
