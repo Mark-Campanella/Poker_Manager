@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="33"
-            android:hint="@string/big_blind"
+            android:hint="@string/blind"
             android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
