@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
                 // TODO: descomentar o código abaixo quando o raise for implementado
                 // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
                 //if (value >= this.game.table.bet + 1 && value <= game.table.getFocusedPlayer().getChips())
-                    game.raise(value);
+                //    game.raise(value);
                 // Se for -1, é all-in
                 //else if (value == -1)
                     //game.raise(game.table.getFocusedPlayer().getChips());
