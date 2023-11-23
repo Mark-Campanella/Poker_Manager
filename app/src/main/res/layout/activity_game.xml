@@ -43,14 +43,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="150dp"
                 android:layout_marginBottom="40dp"
                 android:backgroundTintMode="multiply"
                 android:editable="false"
                 android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/seat_0"
-                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintEnd_toStartOf="@+id/seat_1"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seat_6"
                 app:layout_constraintVertical_bias="0.486" />
@@ -70,7 +70,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/seat_9"
                 app:layout_constraintTop_toBottomOf="@+id/seat_9"
-                app:layout_constraintVertical_bias="0.827" />
+                app:layout_constraintVertical_bias="0.985" />
 
             <EditText
                 android:id="@+id/seat_0"
@@ -104,7 +104,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/seat_0"
+                app:layout_constraintStart_toEndOf="@+id/seat_9"
                 app:layout_constraintTop_toBottomOf="@+id/seat_4"
                 app:layout_constraintVertical_bias="0.486" />
 
@@ -119,6 +119,8 @@
                 android:enabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/seat_1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/seat_8"
                 app:layout_constraintTop_toBottomOf="@+id/seat_3"
                 app:layout_constraintVertical_bias="0.801" />
 
@@ -133,6 +135,8 @@
                 android:enabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/seat_2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/seat_7"
                 app:layout_constraintTop_toBottomOf="@+id/seat_4"
                 app:layout_constraintVertical_chainStyle="spread" />
 
@@ -169,7 +173,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/seat_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/seat_5"
+                app:layout_constraintStart_toEndOf="@+id/seat_6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -180,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="130dp"
                 android:layout_marginBottom="200dp"
                 android:backgroundTintMode="multiply"
                 android:editable="false"
@@ -188,7 +192,7 @@
                 android:shadowColor="#FFFFFF"
                 android:shadowDx="20"
                 app:layout_constraintBottom_toTopOf="@+id/seat_9"
-                app:layout_constraintEnd_toStartOf="@+id/seat_5"
+                app:layout_constraintEnd_toStartOf="@+id/seat_4"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -199,6 +203,7 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="200dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTintMode="multiply"
                 android:clickable="false"
@@ -206,7 +211,8 @@
                 android:enabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/seat_8"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/seat_3"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seat_6"
                 app:layout_constraintVertical_bias="1.0"
@@ -217,12 +223,14 @@
                 style="@style/NameEditText"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="200dp"
                 android:backgroundTintMode="multiply"
                 android:editable="false"
                 android:enabled="false"
                 app:layout_constraintBottom_toTopOf="@+id/seat_9"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/seat_2"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seat_7"
                 app:layout_constraintVertical_bias="0.211" />
@@ -245,7 +253,7 @@
                 android:textSize="34sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/txt_pot"
                 app:layout_constraintEnd_toEndOf="@+id/seat_1"
-                app:layout_constraintHorizontal_bias="0.291"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/seat_1" />
 
             <ImageView
@@ -467,6 +475,7 @@
                 android:id="@+id/ll9"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/txt_pot"
                 app:layout_constraintEnd_toEndOf="@+id/seat_9"
@@ -516,6 +525,7 @@
                 android:id="@+id/ll1"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/txt_hands"
                 app:layout_constraintEnd_toEndOf="@+id/seat_1"
@@ -764,12 +774,12 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/txt_pot"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/seat_0"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/seat_0"
                 app:layout_constraintTop_toBottomOf="@+id/seat_0"
-                app:layout_constraintVertical_bias="0.1">
+                app:layout_constraintVertical_bias="0.0">
 
                 <LinearLayout
                     android:layout_width="match_parent"
