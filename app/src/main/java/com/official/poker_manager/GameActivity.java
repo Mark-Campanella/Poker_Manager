@@ -16,8 +16,7 @@ import java.util.Hashtable;
 public class GameActivity extends AppCompatActivity {
     private Game game;
     private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10);
-    private class SeatViews
-    {
+    private class SeatViews {
         public EditText edtxtPlayerName;
         public TextView txtChipsTotal;
         public TextView txtRoundChipsBetted;
@@ -30,14 +29,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         // Recuperando o objeto Game criado em SetupActivity
-        if (getIntent().getExtras() != null)
-        {
+        if (getIntent().getExtras() != null) {
             game = (Game) getIntent().getSerializableExtra("game");
         }
 
         // Faz o bind de todas as views
-        for(int i = 0; i < 10; i++)
-        {
+        for(int i = 0; i < 10; i++) {
             seatViewsMap.put(i, new SeatViews());
             seatViewsMap.get(i).edtxtPlayerName = findViewById(getResources().getIdentifier("seat_" + String.valueOf(i), "id", getPackageName()));
             seatViewsMap.get(i).txtChipsTotal = findViewById(getResources().getIdentifier("txt_chips_" + String.valueOf(i), "id", getPackageName()));
@@ -47,10 +44,8 @@ public class GameActivity extends AppCompatActivity {
 
         ArrayList<Player> players = game.getTable().getPlayers();
         // Inicialização das views com os valores
-        for(int i = 0; i < 10; i++)
-        {
-            if(players.get(i) != null)
-            {
+        for(int i = 0; i < 10; i++) {
+            if(players.get(i) != null) {
                 seatViewsMap.get(i).edtxtPlayerName.setText((CharSequence) players.get(i).getName());
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
             }
@@ -59,7 +54,7 @@ public class GameActivity extends AppCompatActivity {
         // Botão de call ou check
         Button btnCheckCall = findViewById(R.id.btn_check_call);
         btnCheckCall.setOnClickListener(v -> {
-            // TODO: lógica se o botão for check ou call
+            game.call();
         });
         
         // Botão de fold
@@ -75,10 +70,10 @@ public class GameActivity extends AppCompatActivity {
             viewModel.getValue().observe(this, value -> {
                 // TODO: descomentar o código abaixo quando o raise for implementado
                 // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
-                //if (value >= this.game.table.bet + 1 && value <= game.table.getFocusedPlayer().getChips())
-                //    game.raise(value);
+                //if (value.intValue() >= this.game.getTableBet() + 1 && value.intValue() <= game.table.getFocusedPlayer().getChips())
+                //    game.raise(value.intValue());
                 // Se for -1, é all-in
-                //else if (value == -1)
+                //else if (value.intValue() == -1)
                     //game.raise(game.table.getFocusedPlayer().getChips());
                 // Senão, é um valor inválido e exibe um AlertDialog
                 //else
