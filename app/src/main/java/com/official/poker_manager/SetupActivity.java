@@ -198,9 +198,9 @@ public class SetupActivity extends AppCompatActivity {
                     }
                 }
 
-                if(numPlayers < 2)
+                if(numPlayers < 3)
                 {
-                    Toast.makeText(getApplicationContext(), "Adicione ao menos dois jogadores", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Adicione ao menos três jogadores", Toast.LENGTH_LONG).show();
                     return;
                 }
                 
