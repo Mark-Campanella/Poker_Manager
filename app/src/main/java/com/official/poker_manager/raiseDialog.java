@@ -40,7 +40,8 @@ public class raiseDialog extends DialogFragment {
                         // Pegar o valor digitado pelo usuário
                         viewModel = new ViewModelProvider(requireActivity()).get(ValueViewModel.class);
                         EditText edtxtValue = getDialog().findViewById(R.id.edtxt_input_value);
-                        viewModel.setValue(Integer.parseInt(edtxtValue.getText().toString()));
+                        Integer raiseValue = Integer.valueOf(edtxtValue.getText().toString());
+                        viewModel.setValue(raiseValue);
                     }
                 })
                 .setNeutralButton(R.string.all_in, new DialogInterface.OnClickListener() {
