@@ -99,41 +99,14 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        int dealerID = selectDealerID();
-        players.get(dealerID).setDealer(true);
-        seatViewsMap.get(dealerID).txtRoundRole.setText(R.string.role_dealer);
+        game.startGame();
 
-        int smallBlidID = getNextValidPlayer(dealerID);
-        players.get(smallBlidID).setSmallBlind(true);
-        seatViewsMap.get(smallBlidID).txtRoundRole.setText(R.string.role_small_blind);
+        seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
 
-        int bigBlidID = getNextValidPlayer(smallBlidID);
-        players.get(bigBlidID).setBigBlind(true);
-        seatViewsMap.get(bigBlidID).txtRoundRole.setText(R.string.role_big_blind);
+        seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
 
-        // Primeiro a jogar
-        int firstFocusedPlayer = getNextValidPlayer(bigBlidID);
-        game.getTable().setFocusedPlayer(firstFocusedPlayer);
-        seatViewsMap.get(firstFocusedPlayer).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
+        seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
 
-        // # TODO fazer um startGame em Game e chamar aqui
-    }
-
-    private int selectDealerID()
-    {
-        Random rand = new Random();
-        return getNextValidPlayer(rand.nextInt(10));
-    }
-
-    private int getNextValidPlayer(int actualFocusedPlayer)
-    {
-        int nextFocusedPlayer  = actualFocusedPlayer;
-
-        do{
-            nextFocusedPlayer++;
-            if(nextFocusedPlayer == 10) nextFocusedPlayer = 0;
-        }while(players.get(nextFocusedPlayer) == null || players.get(nextFocusedPlayer).isFolded() || !players.get(nextFocusedPlayer).isPlaying());
-
-        return nextFocusedPlayer;
+        seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
     }
 }

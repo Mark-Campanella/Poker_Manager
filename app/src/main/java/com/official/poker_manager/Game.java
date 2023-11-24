@@ -2,6 +2,7 @@ package com.official.poker_manager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game implements Serializable {
     // Lista circular para jogadores
@@ -10,15 +11,32 @@ public class Game implements Serializable {
     public class Table implements Serializable
     {
         private ArrayList<Player> players;
+        private int dealerID;
+        private int smallBlindID;
+        private int bigBlindID;
         private int focusedPlayerID;
 
         public Table(ArrayList<Player> players)
         {
             this.players = players;
-            this.focusedPlayerID = 0;
         }
 
         public ArrayList<Player> getPlayers() { return players; }
+
+        public int getDealerID() { return dealerID; }
+
+        public void setDealerID(int dealerID) { this.dealerID = dealerID; }
+
+        public int getSmallBlindID() { return smallBlindID; }
+
+        public int getBigBlindID() { return bigBlindID; }
+
+        public void setFocusedPlayer(int playerID)
+        {
+            this.focusedPlayerID = playerID;
+        }
+
+        public int getFocusedPlayer() { return focusedPlayerID; }
 
         public void addPlayer(int playerID, Player player)
         {
@@ -30,29 +48,47 @@ public class Game implements Serializable {
             this.players.set(playerID, null);
         }
 
-        public void setFocusedPlayer(int playerID)
+        // Método para avançar para a próxima rodada (avança Dealer, Small Blind e Big Blind)
+        public void nextTableHand()
         {
-            this.focusedPlayerID = playerID;
+            this.players.get(dealerID).setDealer(false);
+            int nextDealerID = getNextValidPlayer(dealerID);
+            this.players.get(nextDealerID).setDealer(true);
+
+            this.players.get(nextDealerID).setSmallBlind(false);
+            int nextSmallBlindID = getNextValidPlayer(nextDealerID);
+            this.players.get(nextSmallBlindID).setSmallBlind(true);
+
+            this.players.get(nextSmallBlindID).setBigBlind(false);
+            int nextBigBlindID = getNextValidPlayer(nextSmallBlindID);
+            this.players.get(nextBigBlindID).setBigBlind(true);
+
+            nextTurn();
         }
 
-        public Player getFocusedPlayer()
+        // Método para avançar para o próxima turno (avança o Focused Player)
+        public void nextTurn()
         {
-            return players.get(focusedPlayerID);
+            focusedPlayerID = getNextValidPlayer(focusedPlayerID);
         }
 
-        public void nextValidPlayer()
+        protected int getNextValidPlayer(int currentPlayer)
         {
-            do {
-                focusedPlayerID++;
-                if (focusedPlayerID == 10) focusedPlayerID = 0;
-            }while(players.get(focusedPlayerID) == null || players.get(focusedPlayerID).isFolded() || !players.get(focusedPlayerID).isPlaying());
+            int nextPlayer  = currentPlayer;
+
+            do{
+                nextPlayer++;
+                if(nextPlayer == 10) nextPlayer = 0;
+            }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
+
+            return nextPlayer;
         }
     }
 
     // Se aumenta os blinds
     private boolean autoRaise;
     // Quantidade inicial da "big blind"
-    private int bigBlind;
+    private int blind;
     // Quando aumenta a "big blind"
     private int every;
     // Multiplicador da "big blind"
@@ -84,10 +120,10 @@ public class Game implements Serializable {
     }
     
     // Construtor
-    public Game(ArrayList<Player> players, boolean autoRaise, int bigBlind, int every, float multiplier) {
+    public Game(ArrayList<Player> players, boolean autoRaise, int blind, int every, float multiplier) {
         this.table = new Table(players);
         this.autoRaise = autoRaise;
-        this.bigBlind = bigBlind;
+        this.blind = blind;
         this.every = every;
         this.multiplier = multiplier;
         this.tableBet = 0;
@@ -95,37 +131,49 @@ public class Game implements Serializable {
 
     public void startGame()
     {
-        // Escolher focusedPlayer inicial
+        int dealerID = selectDealerID();
+        table.setDealerID(dealerID);
+        nextHand();
         // Setar outras informações necessaŕias para iniciar o game
     }
 
-    public void nextRound(){
-        //mudar a rodada do jogo
+    public void nextHand()
+    {
+        table.nextTableHand();
+        // resetar as cartas
+        // resetar os pots
+        // etc
+        // Incrementar um contador de hands e verificar se deve fazer auto raise
     }
 
-    //Função referente a situação de quando a aposta da mesa é 0 (check)
-    // ou diferente de 0 (Call)
-    public void call(){
-        Player moment;
-        moment = table.getFocusedPlayer();
-        moment.bet(tableBet);
-        table.nextValidPlayer();
+    //Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
+    public void call()
+    {
+        table.players.get(table.getFocusedPlayer()).bet(tableBet);
+        table.nextTurn();
     }
+
     //Função para aumentar a aposta da rodada
-    public void raise(int bet){
-        Player moment;
+    public void raise(int bet)
+    {
+        int moment;
         moment = table.getFocusedPlayer();
         bet = bet + tableBet;
         tableBet = bet;
-        moment.bet(bet);
-        table.nextValidPlayer();
+        //moment.bet(bet);
+        table.nextTurn();
     }
 
     //Função para sair do rodada
-    public void fold() {
-        Player moment;
-        moment = table.getFocusedPlayer();
-        moment.fold();
-        table.nextValidPlayer();
+    public void fold()
+    {
+        table.players.get(table.getFocusedPlayer()).fold();
+        table.nextTurn();
+    }
+
+    private int selectDealerID()
+    {
+        Random rand = new Random();
+        return table.getNextValidPlayer(rand.nextInt(10));
     }
 }
