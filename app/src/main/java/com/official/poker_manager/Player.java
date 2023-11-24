@@ -55,6 +55,10 @@ public class Player implements Serializable {
 
     public String getName() { return name; }
 
+    public void setIsPlaying(boolean isPlaying) { this.isPlaying = isPlaying; }
+
+    public boolean isPlaying() { return this.isPlaying; }
+
     // Construtor
     public Player(String name, int chipsTotal, boolean isPlaying) {
         this.name = name;
@@ -69,6 +73,8 @@ public class Player implements Serializable {
     
     // Tira o jogador da rodada
     public void fold() { this.isFolded = true; }
+
+    public boolean isFolded() { return this.isFolded; }
     
     // Aposta uma quantia
     public void bet(int amount) {
