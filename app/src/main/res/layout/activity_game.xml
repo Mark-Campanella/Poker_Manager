@@ -420,8 +420,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/txt_border"
-                    android:gravity="center"
-                    android:text="@string/role_big_blind" />
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
@@ -617,8 +616,7 @@
                     android:layout_gravity="bottom"
                     android:layout_weight="1"
                     android:background="@drawable/txt_border"
-                    android:gravity="center"
-                    android:text="@string/role_dealer" />
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
@@ -667,8 +665,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/txt_border"
-                    android:gravity="center"
-                    android:text="@string/role_small_blind" />
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
