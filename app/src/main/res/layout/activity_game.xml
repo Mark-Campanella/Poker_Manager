@@ -175,7 +175,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/seat_6"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintVertical_chainStyle="spread" />
 
             <EditText
                 android:id="@+id/seat_6"
@@ -213,6 +214,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/seat_3"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seat_6"
                 app:layout_constraintVertical_bias="1.0"
@@ -231,6 +233,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/seat_2"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seat_7"
                 app:layout_constraintVertical_bias="0.211" />
@@ -919,9 +922,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
-                android:backgroundTint="#4F2FFF00"
+                android:backgroundTint="@color/call"
                 android:fontFamily="@font/jokeswild"
-                android:text="CHECK"
+                android:text="CALL"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="#CD000000"

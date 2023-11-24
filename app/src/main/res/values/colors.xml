@@ -9,5 +9,5 @@
     <color name="out">#AA00FF</color>
     <color name="turn">#FFFF6D00</color>
     <color name="in">#2B2B2B</color>
-
+    <color name="call">#FFD600</color>
 </resources>
