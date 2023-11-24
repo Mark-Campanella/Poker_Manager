@@ -1,7 +1,5 @@
 package com.official.poker_manager;
 
-import com.google.android.material.tabs.TabLayout;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -42,12 +40,12 @@ public class Game implements Serializable {
             return players.get(focusedPlayerID);
         }
 
-        public void nextPlayer()
+        public void nextValidPlayer()
         {
             do {
                 focusedPlayerID++;
                 if (focusedPlayerID == 10) focusedPlayerID = 0;
-            } while (players.get(focusedPlayerID) == null);
+            }while(players.get(focusedPlayerID) == null || players.get(focusedPlayerID).isFolded() || !players.get(focusedPlayerID).isPlaying());
         }
     }
 
@@ -111,7 +109,7 @@ public class Game implements Serializable {
         Player moment;
         moment = table.getFocusedPlayer();
         moment.bet(tableBet);
-        table.nextPlayer();
+        table.nextValidPlayer();
     }
     //Função para aumentar a aposta da rodada
     public void raise(int bet){
@@ -120,7 +118,7 @@ public class Game implements Serializable {
         bet = bet + tableBet;
         tableBet = bet;
         moment.bet(bet);
-        table.nextPlayer();
+        table.nextValidPlayer();
     }
 
     //Função para sair do rodada
@@ -128,6 +126,6 @@ public class Game implements Serializable {
         Player moment;
         moment = table.getFocusedPlayer();
         moment.fold();
-        table.nextPlayer();
+        table.nextValidPlayer();
     }
 }
