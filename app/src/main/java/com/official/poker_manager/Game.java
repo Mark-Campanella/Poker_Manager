@@ -29,7 +29,11 @@ public class Game implements Serializable {
 
         public int getSmallBlindID() { return smallBlindID; }
 
+        public void setSmallBlindID(int smallBlindID) { this.smallBlindID = smallBlindID; }
+
         public int getBigBlindID() { return bigBlindID; }
+
+        public void setBigBlindID(int bigBlindID) { this.bigBlindID = bigBlindID; }
 
         public void setFocusedPlayer(int playerID)
         {
@@ -77,8 +81,8 @@ public class Game implements Serializable {
             int nextPlayer  = currentPlayer;
 
             do{
-                nextPlayer++;
-                if(nextPlayer == 10) nextPlayer = 0;
+                nextPlayer--;
+                if(nextPlayer == -1) nextPlayer = 9;
             }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
 
             return nextPlayer;
@@ -101,7 +105,7 @@ public class Game implements Serializable {
         return tableBet;
     }
 
-    public void setTableBet(int apostaMesa) {
+    public void setTableBet(int tableBet) {
         this.tableBet = tableBet;
     }
 
@@ -133,7 +137,19 @@ public class Game implements Serializable {
     {
         int dealerID = selectDealerID();
         table.setDealerID(dealerID);
-        nextHand();
+        table.players.get(dealerID).setDealer(true);
+
+        int smallBlind = table.getNextValidPlayer(dealerID);
+        table.setSmallBlindID(smallBlind);
+        table.players.get(smallBlind).setSmallBlind(true);
+
+        int bigBlind = table.getNextValidPlayer(smallBlind);
+        table.setBigBlindID(bigBlind);
+        table.players.get(bigBlind).setBigBlind(true);
+
+        int underTheGun = table.getNextValidPlayer(bigBlind);
+        table.setFocusedPlayer(underTheGun);
+
         // Setar outras informações necessaŕias para iniciar o game
     }
 
