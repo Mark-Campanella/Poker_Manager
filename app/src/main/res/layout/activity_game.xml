@@ -247,14 +247,16 @@
                 android:id="@+id/txt_hands"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="71dp"
                 android:fontFamily="@font/jokeswild"
                 android:text="HANDS:  0"
                 android:textAppearance="@style/Texts"
                 android:textSize="34sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/txt_pot"
-                app:layout_constraintEnd_toEndOf="@+id/seat_1"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/seat_1" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ll0"
+                app:layout_constraintTop_toBottomOf="@+id/seat_1" />
 
             <ImageView
                 android:id="@+id/card_1"
