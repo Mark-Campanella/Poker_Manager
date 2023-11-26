@@ -29,6 +29,21 @@
             android:translationY="25dp"
             app:srcCompat="@drawable/table_vector" />
 
+        <TextView
+            android:id="@+id/txtToPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/jokeswild"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="To Pay: 00"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_editor_absoluteY="316dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,7 +71,7 @@
                 app:layout_constraintVertical_bias="0.486" />
 
             <TextView
-                android:id="@+id/txt_pot"
+                android:id="@+id/txt__pot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:editable="false"
@@ -176,7 +191,7 @@
                 app:layout_constraintStart_toEndOf="@+id/seat_6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:layout_constraintVertical_chainStyle="spread" />
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <EditText
                 android:id="@+id/seat_6"
@@ -385,6 +400,7 @@
                 android:id="@+id/ll3"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginEnd="7dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/seat_2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -481,7 +497,7 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/txt_pot"
+                app:layout_constraintBottom_toTopOf="@+id/txt__pot"
                 app:layout_constraintEnd_toEndOf="@+id/seat_9"
                 app:layout_constraintHorizontal_bias="0.414"
                 app:layout_constraintStart_toStartOf="@+id/seat_9"
@@ -965,6 +981,7 @@
                 android:textStyle="bold"
                 android:typeface="serif"
                 app:strokeWidth="2dp" />
+
         </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
 
