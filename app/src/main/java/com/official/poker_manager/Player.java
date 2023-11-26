@@ -58,6 +58,12 @@ public class Player implements Serializable {
     public void setIsPlaying(boolean isPlaying) { this.isPlaying = isPlaying; }
 
     public boolean isPlaying() { return this.isPlaying; }
+    
+    public int getRoundChipsBetted() { return this.roundChipsBetted; }
+    
+    public void setRoundChipsBetted(int chips) {
+        this.roundChipsBetted = chips;
+    }
 
     // Construtor
     public Player(String name, int chipsTotal, boolean isPlaying) {

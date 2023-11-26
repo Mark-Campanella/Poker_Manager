@@ -5,19 +5,26 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private Game game;
     private ArrayList<Player> players;
+    private ArrayList<ImageView> cards;
     private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10);
+    private ValueViewModel viewModel;
     private class SeatViews
     {
         public EditText edtxtPlayerName;
@@ -39,44 +46,50 @@ public class GameActivity extends AppCompatActivity {
 
         players = game.getTable().getPlayers();
 
+        // Inicializa a array de cartas
+        cards = new ArrayList<ImageView>(Collections.nCopies(5, null));
+        for (int i = 0; i < 5; i++) {
+            cards.set(i, (ImageView) findViewById(getResources().getIdentifier("card_" + String.valueOf(i), "id", getPackageName())));
+        }
+
         startGameActivity();
+        
+        // Inicializa a ViewModel usada em raise
+        viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
+        viewModel.getValue().observe(this, value -> {
+            int raiseValue = value.intValue();
+            // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
+            if (raiseValue >= this.game.getBlind() && raiseValue+game.getTableBet()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted() <= players.get(game.getTable().getFocusedPlayer()).getChips())
+                game.raise(raiseValue);
+            // Se for -1, é all-in
+            else if (raiseValue == -1)
+                game.raise(players.get(game.getTable().getFocusedPlayer()).getChips()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted());
+            // Senão, é um valor inválido e exibe um AlertDialog
+            else
+                new AlertDialog.Builder(this)
+                        .setTitle("Invalid raise value")
+                        .setMessage("The value you are trying to raise is too low or you don't have enough funds to raise in this bet!")
+                        .setPositiveButton(R.string.ok, null)
+                        .show();
+            updateGameActivity();
+        });
         
         // Botão de call ou check
         Button btnCheckCall = findViewById(R.id.btn_check_call);
         btnCheckCall.setOnClickListener(v -> {
-            // TODO: lógica se o botão for check ou call
+            call();
         });
         
         // Botão de fold
         Button btnFold = findViewById(R.id.btn_fold);
         btnFold.setOnClickListener(v -> {
-            game.fold();
+            fold();
         });
         
         // Botão de raise
         Button btnRaise = findViewById(R.id.btn_raise);
         btnRaise.setOnClickListener(v -> {
-            ValueViewModel viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
-            viewModel.getValue().observe(this, value -> {
-                // TODO: descomentar o código abaixo quando o raise for implementado
-                // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
-                //if (value >= this.game.table.bet + 1 && value <= game.table.getFocusedPlayer().getChips())
-                    game.raise(value);
-                // Se for -1, é all-in
-                //else if (value == -1)
-                    //game.raise(game.table.getFocusedPlayer().getChips());
-                // Senão, é um valor inválido e exibe um AlertDialog
-                //else
-                    //new AlertDialog.Builder(this)
-                            //.setTitle("Valor inválido")
-                            //.setMessage("Valor de aposta inválido!")
-                            //.setPositiveButton("OK", null)
-                            //.show();
-            });
-            
-            // Exibir um pop-up para o usuário digitar o valor do raise
-            DialogFragment dialog = new raiseDialog();
-            dialog.show(getSupportFragmentManager(), "Raise");
+            raise();
         });
     }
 
@@ -108,5 +121,64 @@ public class GameActivity extends AppCompatActivity {
         seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
 
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
+    }
+    
+    // Atualiza as informações das views a cada call/check, fold ou raise
+    private void updateGameActivity() {
+        // Atualiza as informações de todos os jogadores
+        for(int i = 0; i < 10; i++) {
+            if(players.get(i) != null) {
+                seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
+                seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
+                seatViewsMap.get(i).txtRoundRole.setText("");
+                if (players.get(i).isFolded())
+                    seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.folded));
+                else
+                    seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
+            }
+        }
+        
+        // Atualiza as informações de quem é o dealer, small blind, big blind e de quem é a vez
+        seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
+        seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
+        seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
+        seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
+        
+        // Atualiza as cartas
+        if (game.getCards() > 0) {
+            if (game.getCards() > 5) {
+                // TODO: Lógica de vencer a hand
+                Toast.makeText(GameActivity.this, "Parabéns!!! Você venceu (REAL!!! - Não é fake)", Toast.LENGTH_SHORT).show();
+            }
+            else
+                for (int i = 0; i < game.getCards(); i++)
+                    this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
+        }
+    }
+    
+    // Ações de call
+    private void call () {
+        if(game.getTableBet() < players.get(game.getTable().getFocusedPlayer()).getChips())
+            game.call();
+        else
+            new AlertDialog.Builder(this)
+                    .setTitle("Insufficient funds")
+                    .setMessage("You don't have enough funds to call this bet!")
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+        updateGameActivity();
+    }
+    
+    // Ações de fold
+    private void fold () {
+        game.fold();
+        updateGameActivity();
+    }
+    
+    // Ações de raise
+    private void raise() {
+        // Exibir um pop-up para o usuário digitar o valor do raise
+        DialogFragment dialog = new raiseDialog();
+        dialog.show(getSupportFragmentManager(), "Raise");
     }
 }

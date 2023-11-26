@@ -82,7 +82,9 @@ public class Game implements Serializable {
 
             do{
                 nextPlayer--;
-                if(nextPlayer == -1) nextPlayer = 9;
+                if(nextPlayer == -1){
+                    nextPlayer = 9;
+                }
             }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
 
             return nextPlayer;
@@ -99,16 +101,23 @@ public class Game implements Serializable {
     private float multiplier;
     // Quantidade apostada na rodada
     private int tableBet;
+    // Quantidade total apostada
+    private  int pot;
+    // Quantidade de cartas já viradas
+    private int cards;
+    // Se for a primeira rodada
+    private boolean firstRound;
+    // Se voltou no primeiro jogador
 
     // Getters e Setters
     public int getTableBet() {
         return tableBet;
     }
 
-    public void setTableBet(int tableBet) {
-        this.tableBet = tableBet;
+    public int getPot() {
+        return pot;
     }
-
+    
     public boolean isAutoRaise() {
         return autoRaise;
     }
@@ -122,7 +131,15 @@ public class Game implements Serializable {
     public float getMultiplier() {
         return multiplier;
     }
-    
+
+    public int getCards() {
+        return cards;
+    }
+
+    public int getBlind() {
+        return blind;
+    }
+
     // Construtor
     public Game(ArrayList<Player> players, boolean autoRaise, int blind, int every, float multiplier) {
         this.table = new Table(players);
@@ -130,7 +147,10 @@ public class Game implements Serializable {
         this.blind = blind;
         this.every = every;
         this.multiplier = multiplier;
-        this.tableBet = 0;
+        this.tableBet = blind;
+        this.pot = 0;
+        this.cards = 0;
+        this.firstRound = true;
     }
 
     public void startGame()
@@ -158,6 +178,7 @@ public class Game implements Serializable {
         table.nextTableHand();
         // resetar as cartas
         // resetar os pots
+        // 
         // etc
         // Incrementar um contador de hands e verificar se deve fazer auto raise
     }
@@ -165,18 +186,21 @@ public class Game implements Serializable {
     //Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
     public void call()
     {
-        table.players.get(table.getFocusedPlayer()).bet(tableBet);
+        Player alexandre = table.players.get(table.getFocusedPlayer());
+        alexandre.bet(tableBet-alexandre.getRoundChipsBetted());
         table.nextTurn();
+
+        if (checkNextRound())
+            nextRound();
     }
 
     //Função para aumentar a aposta da rodada
     public void raise(int bet)
     {
-        int moment;
-        moment = table.getFocusedPlayer();
-        bet = bet + tableBet;
-        tableBet = bet;
-        //moment.bet(bet);
+        tableBet += bet;
+        Player alexandre = table.players.get(table.getFocusedPlayer());
+        alexandre.bet(tableBet-alexandre.getRoundChipsBetted());
+        
         table.nextTurn();
     }
 
@@ -185,6 +209,43 @@ public class Game implements Serializable {
     {
         table.players.get(table.getFocusedPlayer()).fold();
         table.nextTurn();
+        
+        if (checkNextRound())
+            nextRound();
+    }
+    
+    // Função para o fim de uma rodada
+    private void nextRound() {
+        if(firstRound) {
+            cards += 3;
+            firstRound = false;
+        }
+        else
+            cards += 1;
+        
+        pot += withdrawChips();
+        tableBet = blind;
+        
+    }
+    
+    // Verifica se todos os jogadores em jogo tem sua aposta igualada à referência da mesa
+    boolean checkNextRound() {
+        for (Player player: table.getPlayers())
+            if (player != null && !player.isFolded() && player.isPlaying())
+                if (!(player.getRoundChipsBetted() == tableBet))
+                    return false;
+        return true;
+    }
+
+    // Retorna a soma das apostas da rodada e zera as apostas atuais
+    int withdrawChips() {
+        int chips = 0;
+        for (Player player: table.getPlayers())
+            if (player != null && player.isPlaying()){
+                chips += player.getRoundChipsBetted();
+                player.setRoundChipsBetted(0);
+            }
+        return chips;
     }
 
     private int selectDealerID()
