@@ -96,4 +96,9 @@ public class Player implements Serializable {
             this.chipsTotal -= amount;
         }
     }
+
+    public void addChips(int amount)
+    {
+        this.chipsTotal += amount;
+    }
 }

@@ -1,5 +1,7 @@
 package com.official.poker_manager;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -113,6 +115,8 @@ public class Game implements Serializable
     private int lastPlayerToRaise;
     private int tempLastPlayerToRaise;
     private boolean setLastPlayerToRaise;
+    private int handsCount;
+    private int remainedHandToAutoRaise;
 
     // Getters e Setters
     public int getTableBet() {
@@ -144,6 +148,8 @@ public class Game implements Serializable
     public int getBlind() {
         return blind;
     }
+
+    public int getHandsCount() { return handsCount; }
 
     // Construtor
     public Game(ArrayList<Player> players, boolean autoRaise, int blind, int every, float multiplier) {
@@ -179,6 +185,8 @@ public class Game implements Serializable
         table.players.get(table.getSmallBlindID()).bet(blind/2);
         lastPlayerToRaise = underTheGun;
         setLastPlayerToRaise = false;
+        handsCount = 0;
+        remainedHandToAutoRaise = 0;
     }
 
     // Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
@@ -266,19 +274,33 @@ public class Game implements Serializable
         }
     }
 
-    public void endHand(ArrayList<Player> winners)
+    private void nextHand(ArrayList<Player> winners)
     {
-        //
+        int quantityWinners = winners.size();
+        int chipsPerWinner = pot/quantityWinners;
+
+        for(Player winner : winners)
+        {
+            winner.addChips(chipsPerWinner);
+        }
+
+        table.nextTableHand();
+
+        cards = 0;
+        pot = 0;
+        handsCount++;
+        remainedHandToAutoRaise++;
+        if(autoRaise && remainedHandToAutoRaise >= every)
+        {
+            performeAutoRaise();
+        }
+        // Incrementar um contador de hands e verificar se deve fazer auto raise
     }
 
-    private void nextHand()
+    private void performeAutoRaise()
     {
-        table.nextTableHand();
-        // resetar as cartas
-        // resetar os pots
-        //
-        // etc
-        // Incrementar um contador de hands e verificar se deve fazer auto raise
+        remainedHandToAutoRaise = 0;
+        blind = (int) (blind * multiplier);
     }
 
     // Verifica se todos os jogadores em jogo tem sua aposta igualada à referência da mesa

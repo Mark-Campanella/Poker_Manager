@@ -146,7 +146,11 @@ public class GameActivity extends AppCompatActivity {
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
             }
         }
-        
+
+        // Se só tiver dois jogadores, o update deve operar de modo diferente:
+            // O Dealer/BigBlind recebe a role D/B
+            // E o SmallBlind continua igual
+
         // Atualiza as informações de quem é o dealer, small blind, big blind e de quem é a vez
         seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
         seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
