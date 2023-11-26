@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,13 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
-import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     private Game game;
     private ArrayList<Player> players;
     private ArrayList<ImageView> cards;
-    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10);
+    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<>(10);
     private ValueViewModel viewModel;
     private class SeatViews
     {
@@ -97,6 +95,8 @@ public class GameActivity extends AppCompatActivity {
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private void startGameActivity()
     {
+        game.startGame();
+
         // Faz o bind de todas as views e configura seus valores
         for(int i = 0; i < 10; i++)
         {
@@ -112,8 +112,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        game.startGame();
-
         seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
 
         seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
@@ -124,10 +122,13 @@ public class GameActivity extends AppCompatActivity {
     }
     
     // Atualiza as informações das views a cada call/check, fold ou raise
-    private void updateGameActivity() {
+    private void updateGameActivity()
+    {
         // Atualiza as informações de todos os jogadores
-        for(int i = 0; i < 10; i++) {
-            if(players.get(i) != null) {
+        for(int i = 0; i < 10; i++)
+        {
+            if(players.get(i) != null)
+            {
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
                 seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
                 seatViewsMap.get(i).txtRoundRole.setText("");
@@ -145,8 +146,10 @@ public class GameActivity extends AppCompatActivity {
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
         
         // Atualiza as cartas
-        if (game.getCards() > 0) {
-            if (game.getCards() > 5) {
+        if(game.getCards() > 0)
+        {
+            if (game.getCards() > 5)
+            {
                 // TODO: Lógica de vencer a hand
                 Toast.makeText(GameActivity.this, "Parabéns!!! Você venceu (REAL!!! - Não é fake)", Toast.LENGTH_SHORT).show();
             }

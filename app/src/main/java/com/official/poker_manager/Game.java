@@ -82,7 +82,8 @@ public class Game implements Serializable {
 
             do{
                 nextPlayer--;
-                if(nextPlayer == -1){
+                if(nextPlayer == -1)
+                {
                     nextPlayer = 9;
                 }
             }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
@@ -107,7 +108,8 @@ public class Game implements Serializable {
     private int cards;
     // Se for a primeira rodada
     private boolean firstRound;
-    // Se voltou no primeiro jogador
+    // Último jogador a aumentar a aposta
+    private int lastPlayerToRaise;
 
     // Getters e Setters
     public int getTableBet() {
@@ -170,81 +172,141 @@ public class Game implements Serializable {
         int underTheGun = table.getNextValidPlayer(bigBlind);
         table.setFocusedPlayer(underTheGun);
 
-        // Setar outras informações necessaŕias para iniciar o game
+        table.players.get(table.getBigBlindID()).bet(blind);
+        table.players.get(table.getSmallBlindID()).bet(blind/2);
+        lastPlayerToRaise = underTheGun;
     }
 
-    public void nextHand()
-    {
-        table.nextTableHand();
-        // resetar as cartas
-        // resetar os pots
-        // 
-        // etc
-        // Incrementar um contador de hands e verificar se deve fazer auto raise
-    }
-
-    //Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
+    // Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
     public void call()
     {
         Player alexandre = table.players.get(table.getFocusedPlayer());
         alexandre.bet(tableBet-alexandre.getRoundChipsBetted());
         table.nextTurn();
 
-        if (checkNextRound())
+        if(checkNextRound() && table.getFocusedPlayer() == lastPlayerToRaise)
+        {
             nextRound();
+        }
     }
 
-    //Função para aumentar a aposta da rodada
+    // Função para aumentar a aposta da rodada
     public void raise(int bet)
     {
         tableBet += bet;
+        lastPlayerToRaise = table.getFocusedPlayer();
         Player alexandre = table.players.get(table.getFocusedPlayer());
         alexandre.bet(tableBet-alexandre.getRoundChipsBetted());
         
         table.nextTurn();
     }
 
-    //Função para sair do rodada
+    // Função para sair do rodada
     public void fold()
     {
         table.players.get(table.getFocusedPlayer()).fold();
-        table.nextTurn();
+        if(lastPlayerToRaise == table.getFocusedPlayer())
+        {
+            table.nextTurn();
+            lastPlayerToRaise = table.getFocusedPlayer();
+        }
+        else
+        {
+            table.nextTurn();
+        }
+
+        // Verificar se não sobrou apenas uma pessoa na mesa
+        if(checkOnlyOnePlayer())
+        {
+            // Dar vitória ao focusedPlayer
+        }
         
-        if (checkNextRound())
+        if(checkNextRound() && table.getFocusedPlayer() == lastPlayerToRaise)
+        {
             nextRound();
+        }
     }
     
     // Função para o fim de uma rodada
-    private void nextRound() {
-        if(firstRound) {
+    private void nextRound()
+    {
+        if(firstRound)
+        {
             cards += 3;
             firstRound = false;
         }
         else
+        {
             cards += 1;
+        }
         
         pot += withdrawChips();
-        tableBet = blind;
-        
+        tableBet = 0;
+        if(!table.players.get(table.getSmallBlindID()).isFolded())
+        {
+            table.setFocusedPlayer(table.getSmallBlindID());
+            lastPlayerToRaise = table.getSmallBlindID();
+        }
+        else
+        {
+            table.setFocusedPlayer(table.getNextValidPlayer(table.getSmallBlindID()));
+            lastPlayerToRaise = table.getNextValidPlayer(table.getSmallBlindID());
+        }
+    }
+
+    private void nextHand()
+    {
+        table.nextTableHand();
+        // resetar as cartas
+        // resetar os pots
+        //
+        // etc
+        // Incrementar um contador de hands e verificar se deve fazer auto raise
     }
     
     // Verifica se todos os jogadores em jogo tem sua aposta igualada à referência da mesa
-    boolean checkNextRound() {
-        for (Player player: table.getPlayers())
-            if (player != null && !player.isFolded() && player.isPlaying())
-                if (!(player.getRoundChipsBetted() == tableBet))
-                    return false;
+    private boolean checkNextRound()
+    {
+        for(Player player: table.getPlayers())
+        {
+            if(player != null && !player.isFolded() && player.isPlaying())
+            {
+                if(!(player.getRoundChipsBetted() == tableBet)) return false;
+            }
+        }
+
         return true;
     }
 
+    private boolean checkOnlyOnePlayer()
+    {
+        int count_players = 0;
+
+        for(Player player: table.getPlayers())
+        {
+            if(player != null && !player.isFolded() && player.isPlaying())
+            {
+                count_players++;
+            }
+        }
+
+        return count_players == 1;
+    }
+
     // Retorna a soma das apostas da rodada e zera as apostas atuais
-    int withdrawChips() {
+    private int withdrawChips()
+    {
         int chips = 0;
-        for (Player player: table.getPlayers())
-            if (player != null && player.isPlaying()){
+
+        for(Player player: table.getPlayers())
+        {
+            if (player != null && player.isPlaying())
+            {
                 chips += player.getRoundChipsBetted();
                 player.setRoundChipsBetted(0);
             }
+        }
+
         return chips;
     }
 
