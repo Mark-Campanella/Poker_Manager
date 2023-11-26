@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game implements Serializable {
+public class Game implements Serializable
+{
     // Lista circular para jogadores
     private Table table;
 
@@ -110,6 +111,8 @@ public class Game implements Serializable {
     private boolean firstRound;
     // Último jogador a aumentar a aposta
     private int lastPlayerToRaise;
+    private int tempLastPlayerToRaise;
+    private boolean setLastPlayerToRaise;
 
     // Getters e Setters
     public int getTableBet() {
@@ -119,7 +122,7 @@ public class Game implements Serializable {
     public int getPot() {
         return pot;
     }
-    
+
     public boolean isAutoRaise() {
         return autoRaise;
     }
@@ -175,6 +178,7 @@ public class Game implements Serializable {
         table.players.get(table.getBigBlindID()).bet(blind);
         table.players.get(table.getSmallBlindID()).bet(blind/2);
         lastPlayerToRaise = underTheGun;
+        setLastPlayerToRaise = false;
     }
 
     // Função referente a situação de quando a aposta da mesa é 0 (check) ou diferente de 0 (Call)
@@ -197,7 +201,7 @@ public class Game implements Serializable {
         lastPlayerToRaise = table.getFocusedPlayer();
         Player alexandre = table.players.get(table.getFocusedPlayer());
         alexandre.bet(tableBet-alexandre.getRoundChipsBetted());
-        
+
         table.nextTurn();
     }
 
@@ -208,7 +212,8 @@ public class Game implements Serializable {
         if(lastPlayerToRaise == table.getFocusedPlayer())
         {
             table.nextTurn();
-            lastPlayerToRaise = table.getFocusedPlayer();
+            setLastPlayerToRaise = true;
+            tempLastPlayerToRaise = table.getFocusedPlayer();
         }
         else
         {
@@ -220,13 +225,20 @@ public class Game implements Serializable {
         {
             // Dar vitória ao focusedPlayer
         }
-        
+
         if(checkNextRound() && table.getFocusedPlayer() == lastPlayerToRaise)
         {
             nextRound();
         }
+
+        // Caso segundo round, o primeiro jogador dê fold
+        if(setLastPlayerToRaise)
+        {
+            lastPlayerToRaise = tempLastPlayerToRaise;
+            setLastPlayerToRaise = false;
+        }
     }
-    
+
     // Função para o fim de uma rodada
     private void nextRound()
     {
@@ -239,7 +251,7 @@ public class Game implements Serializable {
         {
             cards += 1;
         }
-        
+
         pot += withdrawChips();
         tableBet = 0;
         if(!table.players.get(table.getSmallBlindID()).isFolded())
@@ -263,7 +275,7 @@ public class Game implements Serializable {
         // etc
         // Incrementar um contador de hands e verificar se deve fazer auto raise
     }
-    
+
     // Verifica se todos os jogadores em jogo tem sua aposta igualada à referência da mesa
     private boolean checkNextRound()
     {
