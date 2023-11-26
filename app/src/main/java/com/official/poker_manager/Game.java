@@ -82,7 +82,10 @@ public class Game implements Serializable {
 
             do{
                 nextPlayer--;
-                if(nextPlayer == -1) nextPlayer = 9;
+                if(nextPlayer == -1){
+                    nextPlayer = 9;
+                    roundOver = true;
+                }
             }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
 
             return nextPlayer;
@@ -99,16 +102,24 @@ public class Game implements Serializable {
     private float multiplier;
     // Quantidade apostada na rodada
     private int tableBet;
+    // Quantidade total apostada
+    private  int pot;
+    // Quantidade de cartas já viradas
+    private int cards;
+    // Se for a primeira rodada
+    private boolean firstRound;
+    // Se voltou no primeiro jogador
+    private boolean roundOver;
 
     // Getters e Setters
     public int getTableBet() {
         return tableBet;
     }
 
-    public void setTableBet(int tableBet) {
-        this.tableBet = tableBet;
+    public int getPot() {
+        return pot;
     }
-
+    
     public boolean isAutoRaise() {
         return autoRaise;
     }
@@ -122,7 +133,11 @@ public class Game implements Serializable {
     public float getMultiplier() {
         return multiplier;
     }
-    
+
+    public int getCards() {
+        return cards;
+    }
+
     // Construtor
     public Game(ArrayList<Player> players, boolean autoRaise, int blind, int every, float multiplier) {
         this.table = new Table(players);
@@ -130,7 +145,11 @@ public class Game implements Serializable {
         this.blind = blind;
         this.every = every;
         this.multiplier = multiplier;
-        this.tableBet = 0;
+        this.tableBet = blind;
+        this.pot = 0;
+        this.cards = 0;
+        this.firstRound = true;
+        this.roundOver = false;
     }
 
     public void startGame()
@@ -167,16 +186,17 @@ public class Game implements Serializable {
     {
         table.players.get(table.getFocusedPlayer()).bet(tableBet);
         table.nextTurn();
+
+        if (roundOver && tableBet == blind)
+            nextRound();
     }
 
     //Função para aumentar a aposta da rodada
     public void raise(int bet)
     {
-        int moment;
-        moment = table.getFocusedPlayer();
-        bet = bet + tableBet;
-        tableBet = bet;
-        //moment.bet(bet);
+        tableBet += bet;
+        table.players.get(table.getFocusedPlayer()).bet(tableBet);
+        
         table.nextTurn();
     }
 
@@ -185,6 +205,23 @@ public class Game implements Serializable {
     {
         table.players.get(table.getFocusedPlayer()).fold();
         table.nextTurn();
+        
+        if (roundOver && tableBet == blind)
+            nextRound();
+    }
+    
+    // Função para o fim de uma rodada
+    private void nextRound() {
+        if(firstRound) {
+            cards += 3;
+            firstRound = false;
+        }
+        else
+            cards += 1;
+        
+        roundOver = false;
+        pot += tableBet;
+        tableBet = 0;
     }
 
     private int selectDealerID()
