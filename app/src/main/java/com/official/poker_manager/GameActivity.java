@@ -111,24 +111,21 @@ public class GameActivity extends AppCompatActivity {
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
             }
         }
-
-        seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
-
-        seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
-
-        seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
-
-        seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
+        
+        updateGameActivity();
     }
     
     // Atualiza as informações das views a cada call/check, fold ou raise
     private void updateGameActivity()
     {
+        int pot = 0;
         // Atualiza as informações de todos os jogadores
         for(int i = 0; i < 10; i++)
         {
             if(players.get(i) != null)
             {
+                pot += players.get(i).getRoundChipsBetted();
+                
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
                 seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
                 seatViewsMap.get(i).txtRoundRole.setText("");
@@ -157,6 +154,29 @@ public class GameActivity extends AppCompatActivity {
                 for (int i = 0; i < game.getCards(); i++)
                     this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
         }
+        
+        // Verifica se a ação é call ou check
+        Player currentPlayer = players.get(game.getTable().getFocusedPlayer());
+        Button btnCallCheck = (Button) findViewById(R.id.btn_check_call);
+        if (currentPlayer.getRoundChipsBetted() == game.getTableBet()) {
+            btnCallCheck.setText(R.string.check);
+            btnCallCheck.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.checked));
+        }
+        else {
+            btnCallCheck.setText(R.string.call);
+            btnCallCheck.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.call));
+        }
+
+        // Texto de pagamento
+        TextView txtToPay = (TextView) findViewById(R.id.txtToPay);
+        txtToPay.setText("To Pay:\n" + String.valueOf(game.getTableBet()-currentPlayer.getRoundChipsBetted()));
+        
+        // Texto do pot
+        TextView txtPot = (TextView) findViewById(R.id.txt__pot);
+        txtPot.setText("Pot: " + String.valueOf(game.getPot() + pot));
+        
+        // Texto da hand
+        // TODO: Implementar contador de hands
     }
     
     // Ações de call
