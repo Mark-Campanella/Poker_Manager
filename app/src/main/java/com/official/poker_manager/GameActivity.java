@@ -130,12 +130,14 @@ public class GameActivity extends AppCompatActivity {
     private void updateGameActivity()
     {
         int pot = 0;
+        int playerCount = 0;
         // Atualiza as informações de todos os jogadores
         for(int i = 0; i < 10; i++)
         {
             if(players.get(i) != null)
             {
                 pot += players.get(i).getRoundChipsBetted();
+                playerCount++;
                 
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
                 seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
@@ -147,14 +149,19 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        // Se só tiver dois jogadores, o update deve operar de modo diferente:
-            // O Dealer/BigBlind recebe a role D/B
-            // E o SmallBlind continua igual
-
         // Atualiza as informações de quem é o dealer, small blind, big blind e de quem é a vez
-        seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
+        // Se só tiver dois jogadores, o update deve operar de modo diferente:
+        // O Dealer/BigBlind recebe a role D/B
+        // E o SmallBlind continua igual
+        if (playerCount > 2) {
+            seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
+            seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
+        }
+        else {
+            seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.DealerBB);
+        }
+            
         seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
-        seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
         
         // Atualiza as cartas
@@ -189,9 +196,10 @@ public class GameActivity extends AppCompatActivity {
         // Texto do pot
         TextView txtPot = (TextView) findViewById(R.id.txt__pot);
         txtPot.setText("Pot: " + String.valueOf(game.getPot() + pot));
-        
-        // Texto da hand
-        // TODO: Implementar contador de hands
+
+        // Texto de hands
+        TextView txtHands = (TextView) findViewById(R.id.txt_hands);
+        txtHands.setText("Hands: " + String.valueOf(game.getHandsCount()));
     }
     
     // Ações de call
