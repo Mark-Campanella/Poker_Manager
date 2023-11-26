@@ -274,27 +274,45 @@ public class Game implements Serializable
         }
     }
 
-    private void nextHand(ArrayList<Player> winners)
+    public void nextHand(ArrayList<Integer> winners)
     {
         int quantityWinners = winners.size();
         int chipsPerWinner = pot/quantityWinners;
 
-        for(Player winner : winners)
+        for(int winner : winners)
         {
-            winner.addChips(chipsPerWinner);
+            table.players.get(winner).addChips(chipsPerWinner);
         }
 
         table.nextTableHand();
 
+        lastPlayerToRaise =
+
         cards = 0;
         pot = 0;
+
         handsCount++;
         remainedHandToAutoRaise++;
         if(autoRaise && remainedHandToAutoRaise >= every)
         {
             performeAutoRaise();
         }
-        // Incrementar um contador de hands e verificar se deve fazer auto raise
+
+        // Verificando se o jogador foi eliminado e resentando folds
+        for(int i = 0; i < 10; i++)
+        {
+            Player player = table.players.get(i);
+
+            if(player != null && player.isPlaying())
+            {
+                player.setIsFolded(false);
+
+                if(player.getChips() == 0)
+                {
+                    table.removePlayer(i);
+                }
+            }
+        }
     }
 
     private void performeAutoRaise()

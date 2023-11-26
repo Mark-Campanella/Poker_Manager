@@ -65,6 +65,8 @@ public class Player implements Serializable {
         this.roundChipsBetted = chips;
     }
 
+    public void setIsFolded(boolean isFolded) { this.isFolded = isFolded; }
+
     // Construtor
     public Player(String name, int chipsTotal, boolean isPlaying) {
         this.name = name;

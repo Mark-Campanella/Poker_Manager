@@ -194,12 +194,21 @@ public class GameActivity extends AppCompatActivity {
         txtToPay.setText("To Pay:\n" + String.valueOf(game.getTableBet()-currentPlayer.getRoundChipsBetted()));
         
         // Texto do pot
-        TextView txtPot = (TextView) findViewById(R.id.txt__pot);
+        TextView txtPot = (TextView) findViewById(R.id.txt_pot);
         txtPot.setText("Pot: " + String.valueOf(game.getPot() + pot));
 
         // Texto de hands
         TextView txtHands = (TextView) findViewById(R.id.txt_hands);
         txtHands.setText("Hands: " + String.valueOf(game.getHandsCount()));
+    }
+
+    private void nextHandGameActivity()
+    {
+        game.nextHand(winners);
+
+        // Resetar asentos dos players null
+        // Resetar cards
+        // outras coisas
     }
     
     // Ações de call
