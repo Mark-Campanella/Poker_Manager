@@ -27,4 +27,8 @@
     <string name="value">Value</string>
     <string name="all_in">All-in</string>
     <string name="raise">Raise</string>
+    <string name="call">CALL</string>
+    <string name="check">CHECK</string>
+    <string name="Raise">RAISE</string>
+    <string name="fold">FOLD</string>
 </resources>
