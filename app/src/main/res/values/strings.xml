@@ -31,4 +31,5 @@
     <string name="check">CHECK</string>
     <string name="Raise">RAISE</string>
     <string name="fold">FOLD</string>
+    <string name="DealerBB">DE/BB</string>
 </resources>
