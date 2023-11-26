@@ -70,7 +70,8 @@ public class Game implements Serializable
             int nextBigBlindID = getNextValidPlayer(nextSmallBlindID);
             this.players.get(nextBigBlindID).setBigBlind(true);
 
-            nextTurn();
+            int nextFocusedPlayerID = getNextValidPlayer(nextBigBlindID);
+            this.setFocusedPlayer(nextFocusedPlayerID);
         }
 
         // Método para avançar para o próxima turno (avança o Focused Player)
@@ -285,13 +286,14 @@ public class Game implements Serializable
         }
 
         table.nextTableHand();
-
-        lastPlayerToRaise =
+        table.players.get(table.getBigBlindID()).bet(blind);
+        table.players.get(table.getSmallBlindID()).bet(blind/2);
+        lastPlayerToRaise = table.getFocusedPlayer();
 
         cards = 0;
         pot = 0;
-
         handsCount++;
+
         remainedHandToAutoRaise++;
         if(autoRaise && remainedHandToAutoRaise >= every)
         {
