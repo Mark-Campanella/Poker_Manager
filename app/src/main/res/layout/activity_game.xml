@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_3"
+                app:layout_constraintTop_toBottomOf="@+id/card_2"
                 app:layout_constraintVertical_bias="0.29000002" />
 
             <EditText
@@ -262,18 +262,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/seat_1" />
 
             <ImageView
-                android:id="@+id/card_1"
+                android:id="@+id/card_0"
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/card_2"
-                app:layout_constraintEnd_toStartOf="@+id/card_2"
+                app:layout_constraintBottom_toBottomOf="@+id/card_1"
+                app:layout_constraintEnd_toStartOf="@+id/card_1"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/card_2"
+                app:layout_constraintTop_toTopOf="@+id/card_1"
                 app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/back_card" />
+
+            <ImageView
+                android:id="@+id/card_2"
+                android:layout_width="50dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="7dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_3"
+                app:layout_constraintEnd_toStartOf="@+id/card_3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/card_1"
+                app:layout_constraintTop_toTopOf="@+id/card_3"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/back_card" />
 
             <ImageView
@@ -295,20 +309,6 @@
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="7dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/card_6"
-                app:layout_constraintEnd_toStartOf="@+id/card_6"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/card_3"
-                app:layout_constraintTop_toTopOf="@+id/card_6"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/back_card" />
-
-            <ImageView
-                android:id="@+id/card_6"
-                android:layout_width="50dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="7dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="30dp"
@@ -316,21 +316,21 @@
                 app:layout_constraintBottom_toTopOf="@+id/seat_4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/card_4"
+                app:layout_constraintStart_toEndOf="@+id/card_3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/back_card" />
 
             <ImageView
-                android:id="@+id/card_2"
+                android:id="@+id/card_1"
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="6dp"
                 android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/card_3"
-                app:layout_constraintEnd_toStartOf="@+id/card_3"
+                app:layout_constraintBottom_toBottomOf="@+id/card_2"
+                app:layout_constraintEnd_toStartOf="@+id/card_2"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/card_1"
-                app:layout_constraintTop_toTopOf="@+id/card_3"
+                app:layout_constraintStart_toEndOf="@+id/card_0"
+                app:layout_constraintTop_toTopOf="@+id/card_2"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/back_card" />
 

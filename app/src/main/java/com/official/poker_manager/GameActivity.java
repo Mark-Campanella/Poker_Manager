@@ -24,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private ArrayList<Player> players;
     private ArrayList<ImageView> cards;
     private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<Integer, SeatViews>(10);
+    private ValueViewModel viewModel;
     private class SeatViews
     {
         public EditText edtxtPlayerName;
@@ -52,6 +53,26 @@ public class GameActivity extends AppCompatActivity {
         }
 
         startGameActivity();
+        
+        // Inicializa a ViewModel usada em raise
+        viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
+        viewModel.getValue().observe(this, value -> {
+            int raiseValue = value.intValue();
+            // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
+            if (raiseValue >= this.game.getBlind() && raiseValue+game.getTableBet()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted() <= players.get(game.getTable().getFocusedPlayer()).getChips())
+                game.raise(raiseValue);
+            // Se for -1, é all-in
+            else if (raiseValue == -1)
+                game.raise(players.get(game.getTable().getFocusedPlayer()).getChips()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted());
+            // Senão, é um valor inválido e exibe um AlertDialog
+            else
+                new AlertDialog.Builder(this)
+                        .setTitle("Invalid raise value")
+                        .setMessage("The value you are trying to raise is too low or you don't have enough funds to raise in this bet!")
+                        .setPositiveButton(R.string.ok, null)
+                        .show();
+            updateGameActivity();
+        });
         
         // Botão de call ou check
         Button btnCheckCall = findViewById(R.id.btn_check_call);
@@ -124,12 +145,14 @@ public class GameActivity extends AppCompatActivity {
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
         
         // Atualiza as cartas
-        if (game.getCards() < 6)
-            for (int i = 0; i < game.getCards(); i++)
-                this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
-        else {
-            // TODO: Lógica de vencer a hand
-            Toast.makeText(GameActivity.this, "Parabéns!!! Você venceu (REAL!!! - Não é fake)", Toast.LENGTH_SHORT).show();
+        if (game.getCards() > 0) {
+            if (game.getCards() > 5) {
+                // TODO: Lógica de vencer a hand
+                Toast.makeText(GameActivity.this, "Parabéns!!! Você venceu (REAL!!! - Não é fake)", Toast.LENGTH_SHORT).show();
+            }
+            else
+                for (int i = 0; i < game.getCards(); i++)
+                    this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
         }
     }
     
@@ -154,25 +177,6 @@ public class GameActivity extends AppCompatActivity {
     
     // Ações de raise
     private void raise() {
-        ValueViewModel viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
-        viewModel.getValue().observe(this, value -> {
-            int raiseValue = value.intValue();
-            // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
-            if (raiseValue >= (this.game.getTableBet() + 1) && raiseValue+game.getTableBet() <= players.get(game.getTable().getFocusedPlayer()).getChips())
-                game.raise(raiseValue);
-            // Se for -1, é all-in
-            else if (raiseValue == -1)
-                game.raise(players.get(game.getTable().getFocusedPlayer()).getChips());
-            // Senão, é um valor inválido e exibe um AlertDialog
-            else
-                new AlertDialog.Builder(this)
-                        .setTitle("Insufficient funds")
-                        .setMessage("You don't have enough funds to raise in this bet!")
-                        .setPositiveButton(R.string.ok, null)
-                        .show();
-            updateGameActivity();
-        });
-
         // Exibir um pop-up para o usuário digitar o valor do raise
         DialogFragment dialog = new raiseDialog();
         dialog.show(getSupportFragmentManager(), "Raise");

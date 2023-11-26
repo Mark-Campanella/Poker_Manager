@@ -60,6 +60,10 @@ public class Player implements Serializable {
     public boolean isPlaying() { return this.isPlaying; }
     
     public int getRoundChipsBetted() { return this.roundChipsBetted; }
+    
+    public void setRoundChipsBetted(int chips) {
+        this.roundChipsBetted = chips;
+    }
 
     // Construtor
     public Player(String name, int chipsTotal, boolean isPlaying) {
