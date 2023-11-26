@@ -83,8 +83,17 @@ public class Player implements Serializable {
     public boolean isFolded() { return this.isFolded; }
     
     // Aposta uma quantia
-    public void bet(int amount) {
-        this.roundChipsBetted += amount;
-        this.chipsTotal -= amount;
+    public void bet(int amount)
+    {
+        if(amount > this.chipsTotal)
+        {
+            this.roundChipsBetted += this.chipsTotal;
+            this.chipsTotal -= this.chipsTotal;
+        }
+        else
+        {
+            this.roundChipsBetted += amount;
+            this.chipsTotal -= amount;
+        }
     }
 }

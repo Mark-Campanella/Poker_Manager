@@ -266,6 +266,11 @@ public class Game implements Serializable
         }
     }
 
+    public void endHand(ArrayList<Player> winners)
+    {
+        //
+    }
+
     private void nextHand()
     {
         table.nextTableHand();
