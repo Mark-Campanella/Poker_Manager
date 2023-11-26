@@ -1,12 +1,16 @@
 package com.official.poker_manager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +35,10 @@ public class GameActivity extends AppCompatActivity {
         public TextView txtRoundChipsBetted;
         public TextView txtRoundRole;
     }
+    private AppCompatImageButton btnConfirm;
+    private Button btnCheckCall;
+    private Button btnFold;
+    private Button btnRaise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +63,30 @@ public class GameActivity extends AppCompatActivity {
 
         //
         winners = new ArrayList<>();
-        
+
+        //
+
         // Botão de call ou check
-        Button btnCheckCall = findViewById(R.id.btn_check_call);
+        btnCheckCall = findViewById(R.id.btn_check_call);
         btnCheckCall.setOnClickListener(v -> {
             call();
         });
         
         // Botão de fold
-        Button btnFold = findViewById(R.id.btn_fold);
+        btnFold = findViewById(R.id.btn_fold);
         btnFold.setOnClickListener(v -> {
             fold();
         });
         
         // Botão de raise
-        Button btnRaise = findViewById(R.id.btn_raise);
+        btnRaise = findViewById(R.id.btn_raise);
         btnRaise.setOnClickListener(v -> {
             raise();
         });
     }
 
     // Inicializa as informações das views
-    @SuppressLint("UseCompatLoadingForColorStateLists")
+    @SuppressLint({"UseCompatLoadingForColorStateLists", "WrongViewCast"})
     private void startGameActivity()
     {
         game.startGame();
@@ -121,8 +131,53 @@ public class GameActivity extends AppCompatActivity {
                 seatViewsMap.get(i).edtxtPlayerName.setText((CharSequence) players.get(i).getName());
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
             }
+            int finalI = i;
+            seatViewsMap.get(i).edtxtPlayerName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    if(!winners.contains(finalI))
+                    {
+                        winners.add(finalI);
+                        seatViewsMap.get(finalI).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.checked));
+                    }
+                    else
+                    {
+                        winners.remove((Object) finalI);
+                        seatViewsMap.get(finalI).edtxtPlayerName.setBackgroundTintList(null);
+                    }
+                }
+            });
         }
-        
+        btnConfirm = findViewById(R.id.btn_confirm);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if(winners.size() < 1)
+                {
+                    Toast.makeText(GameActivity.this, "Selecione ao menos um vencedor", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+                btnConfirm.setEnabled(false);
+                btnConfirm.setVisibility(View.INVISIBLE);
+                ArrayList<Integer> validPlayers = game.getTable().getValidPlayers();
+                for(int validPlayer : validPlayers)
+                {
+                    seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(false);
+                    seatViewsMap.get(validPlayer).edtxtPlayerName.setEnabled(false);
+                }
+                //Reabilitando os botões de controle (call, raise e fold)
+                btnCheckCall.setEnabled(true);
+                btnRaise.setEnabled(true);
+                btnFold.setEnabled(true);
+
+                nextHandGameActivity();
+            }
+        });
+
         updateGameActivity();
     }
     
@@ -153,11 +208,13 @@ public class GameActivity extends AppCompatActivity {
         // Se só tiver dois jogadores, o update deve operar de modo diferente:
         // O Dealer/BigBlind recebe a role D/B
         // E o SmallBlind continua igual
-        if (playerCount > 2) {
+        if(playerCount > 2)
+        {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
             seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
         }
-        else {
+        else
+        {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.DealerBB);
         }
             
@@ -167,10 +224,25 @@ public class GameActivity extends AppCompatActivity {
         // Atualiza as cartas
         if(game.getCards() > 0)
         {
+            // Indica o fim da mão
             if(game.getCards() > 5)
             {
-                // TODO: Lógica de vencer a hand
-                Toast.makeText(GameActivity.this, "Parabéns!!! Você venceu (REAL!!! - Não é fake)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "Selecione o(s) vencedor(es) dessa mão", Toast.LENGTH_LONG).show();
+                btnConfirm.setEnabled(true);
+                btnConfirm.setVisibility(View.VISIBLE);
+                ArrayList<Integer> validPlayers = game.getTable().getValidPlayers();
+                seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(null);
+                //Desabilitando os botões de controle (call, raise e fold)
+                btnCheckCall.setEnabled(false);
+                btnRaise.setEnabled(false);
+                btnFold.setEnabled(false);
+
+                for(int validPlayer : validPlayers)
+                {
+                    seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(true);
+                    seatViewsMap.get(validPlayer).edtxtPlayerName.setEnabled(true);
+                    seatViewsMap.get(validPlayer).edtxtPlayerName.setKeyListener(null);
+                }
             }
             else
                 for (int i = 0; i < game.getCards(); i++)
@@ -206,9 +278,28 @@ public class GameActivity extends AppCompatActivity {
     {
         game.nextHand(winners);
 
-        // Resetar asentos dos players null
-        // Resetar cards
-        // outras coisas
+        for(int i = 0; i < 10; i++)
+        {
+            Player player = players.get(i);
+
+            if(player == null)
+            {
+                seatViewsMap.get(i).edtxtPlayerName.setText("");
+                seatViewsMap.get(i).txtChipsTotal.setText("0");
+                seatViewsMap.get(i).txtRoundChipsBetted.setText("0");
+                seatViewsMap.get(i).txtRoundRole.setText("");
+                seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
+            }
+        }
+
+        for(int i = 0; i < 5; i++)
+        {
+            this.cards.get(i).setImageResource(R.drawable.back_card);
+        }
+
+        winners.clear();
+
+        updateGameActivity();
     }
     
     // Ações de call

@@ -1,5 +1,7 @@
 package com.official.poker_manager;
 
+import android.widget.ArrayAdapter;
+
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
@@ -60,14 +62,17 @@ public class Game implements Serializable
         {
             this.players.get(dealerID).setDealer(false);
             int nextDealerID = getNextValidPlayer(dealerID);
+            this.dealerID = nextDealerID;
             this.players.get(nextDealerID).setDealer(true);
 
             this.players.get(nextDealerID).setSmallBlind(false);
             int nextSmallBlindID = getNextValidPlayer(nextDealerID);
+            this.smallBlindID = nextSmallBlindID;
             this.players.get(nextSmallBlindID).setSmallBlind(true);
 
             this.players.get(nextSmallBlindID).setBigBlind(false);
             int nextBigBlindID = getNextValidPlayer(nextSmallBlindID);
+            this.bigBlindID = nextBigBlindID;
             this.players.get(nextBigBlindID).setBigBlind(true);
 
             int nextFocusedPlayerID = getNextValidPlayer(nextBigBlindID);
@@ -93,6 +98,22 @@ public class Game implements Serializable
             }while(players.get(nextPlayer) == null || players.get(nextPlayer).isFolded() || !players.get(nextPlayer).isPlaying());
 
             return nextPlayer;
+        }
+
+        public ArrayList<Integer> getValidPlayers()
+        {
+            ArrayList<Integer> validPlayers = new ArrayList<>();
+
+            for(int i = 0; i < 10; i++)
+            {
+                Player player = this.players.get(i);
+                if(player != null && !player.isFolded() && player.isPlaying())
+                {
+                    validPlayers.add(i);
+                }
+            }
+
+            return validPlayers;
         }
     }
 
@@ -293,6 +314,8 @@ public class Game implements Serializable
         cards = 0;
         pot = 0;
         handsCount++;
+        firstRound = true;
+        tableBet = blind;
 
         remainedHandToAutoRaise++;
         if(autoRaise && remainedHandToAutoRaise >= every)
@@ -348,7 +371,6 @@ public class Game implements Serializable
                 count_players++;
             }
         }
-
         return count_players == 1;
     }
 
