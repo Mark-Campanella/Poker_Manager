@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game implements Serializable {
+public class Game implements Serializable
+{
     // Lista circular para jogadores
     private Table table;
 
