@@ -32,4 +32,6 @@
     <string name="Raise">RAISE</string>
     <string name="fold">FOLD</string>
     <string name="DealerBB">DE/BB</string>
+    <string name="win_message">Parabéns, você venceu! Clique no botão abaixo começar um novo jogo!</string>
+    <string name="winner">PlayerName</string>
 </resources>
