@@ -175,6 +175,7 @@ public class GameActivity extends AppCompatActivity {
         int pot = 0;
         int playerCount = 0;
         int playersBalance = 0;
+        int activePlayerCount = 0;
         // Atualiza as informações de todos os jogadores
         for (int i = 0; i < 10; i++) {
             if (players.get(i) != null) {
@@ -189,12 +190,13 @@ public class GameActivity extends AppCompatActivity {
                 else{
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
                     playersBalance += players.get(i).getChips();
+                    activePlayerCount++;
                 }
             }
         }
         
-        // Se todos os jogadores deram all-in
-        if (playersBalance == 0) {
+        // Condições de "vitória imediata"
+        if (playersBalance == 0 || activePlayerCount == 1) {
             game.setCards(6);
         }
 

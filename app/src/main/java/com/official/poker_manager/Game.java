@@ -310,6 +310,22 @@ public class Game implements Serializable
             table.players.get(winner).addChips(chipsPerWinner);
         }
 
+        // Verificando se o jogador foi eliminado e resentando folds
+        for(int i = 0; i < 10; i++)
+        {
+            Player player = table.players.get(i);
+
+            if(player != null && player.isPlaying())
+            {
+                player.setIsFolded(false);
+
+                if(player.getChips() == 0)
+                {
+                    table.removePlayer(i);
+                }
+            }
+        }
+
         table.nextTableHand();
         table.players.get(table.getBigBlindID()).bet(blind);
         table.players.get(table.getSmallBlindID()).bet(blind/2);
@@ -325,22 +341,6 @@ public class Game implements Serializable
         if(autoRaise && remainedHandToAutoRaise >= every)
         {
             performeAutoRaise();
-        }
-
-        // Verificando se o jogador foi eliminado e resentando folds
-        for(int i = 0; i < 10; i++)
-        {
-            Player player = table.players.get(i);
-
-            if(player != null && player.isPlaying())
-            {
-                player.setIsFolded(false);
-
-                if(player.getChips() == 0)
-                {
-                    table.removePlayer(i);
-                }
-            }
         }
     }
 
