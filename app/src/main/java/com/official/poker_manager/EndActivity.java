@@ -16,12 +16,15 @@ public class EndActivity extends AppCompatActivity {
         this.playerName = playerName;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
+
+        // Recuperando o nome do vencedor
+        if (null != getIntent().getExtras())
+            playerName = (String) getIntent().getSerializableExtra("playerName");
+        
         long sleepytime = 500;
         Button btn_restart = findViewById(R.id.btn_restart_game);
         ImageView easter_egg = findViewById(R.id.easter);
@@ -43,6 +46,4 @@ public class EndActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

@@ -268,7 +268,7 @@ public class GameActivity extends AppCompatActivity {
             String winnerName = winner.getName();
 
             // Chamar a activity de fim de jogo, passando o nome do vencedor e encerrando a activity atual
-            startActivity(new Intent(GameActivity.this, EndActivity.class).putExtra("playerName", winnerName));
+            startActivity(new Intent(GameActivity.this, EndActivity.class).putExtra("playerName", (String) winnerName));
             finish();
         }
 
