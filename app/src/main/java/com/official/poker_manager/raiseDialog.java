@@ -37,21 +37,28 @@ public class raiseDialog extends DialogFragment {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // Pegar o valor digitado pelo usuário
-                        viewModel = new ViewModelProvider(requireActivity()).get(ValueViewModel.class);
-                        EditText edtxtValue = getDialog().findViewById(R.id.edtxt_input_value);
-                        Integer raiseValue = Integer.valueOf(edtxtValue.getText().toString());
-                        viewModel.setValue(raiseValue);
+                        // Tenta, se o valor for válido
+                        try {
+                            EditText edtxtValue = getDialog().findViewById(R.id.edtxt_input_value);
+                            // Pegar o valor digitado pelo usuário
+                            viewModel = new ViewModelProvider(requireActivity()).get(ValueViewModel.class);
+                            Integer raiseValue = Integer.valueOf(edtxtValue.getText().toString());
+                            viewModel.setValue(raiseValue);
+                        }
+                        // Se for inválido cancela
+                        catch (Exception e) {
+                            raiseDialog.this.getDialog().cancel();
+                        }
                     }
                 })
-                .setNeutralButton(R.string.all_in, new DialogInterface.OnClickListener() {
+                /*.setNeutralButton(R.string.all_in, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // Retorna flag de all-in
                         viewModel = new ViewModelProvider(requireActivity()).get(ValueViewModel.class);
                         viewModel.setValue(-1);
                     }
-                })
+                })*/
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         raiseDialog.this.getDialog().cancel();

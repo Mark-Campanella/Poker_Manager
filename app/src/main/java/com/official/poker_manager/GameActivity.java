@@ -28,13 +28,14 @@ public class GameActivity extends AppCompatActivity {
     private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<>(10);
     private ArrayList<Integer> winners;
     private ValueViewModel viewModel;
-    private class SeatViews
-    {
+
+    private class SeatViews {
         public EditText edtxtPlayerName;
         public TextView txtChipsTotal;
         public TextView txtRoundChipsBetted;
         public TextView txtRoundRole;
     }
+
     private AppCompatImageButton btnConfirm;
     private Button btnCheckCall;
     private Button btnFold;
@@ -46,8 +47,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         // Recuperando o objeto Game criado em SetupActivity
-        if(getIntent().getExtras() != null)
-        {
+        if (getIntent().getExtras() != null) {
             game = (Game) getIntent().getSerializableExtra("game");
         }
 
@@ -71,13 +71,13 @@ public class GameActivity extends AppCompatActivity {
         btnCheckCall.setOnClickListener(v -> {
             call();
         });
-        
+
         // Botão de fold
         btnFold = findViewById(R.id.btn_fold);
         btnFold.setOnClickListener(v -> {
             fold();
         });
-        
+
         // Botão de raise
         btnRaise = findViewById(R.id.btn_raise);
         btnRaise.setOnClickListener(v -> {
@@ -87,14 +87,12 @@ public class GameActivity extends AppCompatActivity {
 
     // Inicializa as informações das views
     @SuppressLint({"UseCompatLoadingForColorStateLists", "WrongViewCast"})
-    private void startGameActivity()
-    {
+    private void startGameActivity() {
         game.startGame();
 
         // Inicializa a array de cartas
         cards = new ArrayList<ImageView>(Collections.nCopies(5, null));
-        for (int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             cards.set(i, (ImageView) findViewById(getResources().getIdentifier("card_" + String.valueOf(i), "id", getPackageName())));
         }
 
@@ -103,11 +101,11 @@ public class GameActivity extends AppCompatActivity {
         viewModel.getValue().observe(this, value -> {
             int raiseValue = value.intValue();
             // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
-            if (raiseValue >= this.game.getBlind() && raiseValue+game.getTableBet()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted() <= players.get(game.getTable().getFocusedPlayer()).getChips())
+            if (raiseValue >= this.game.getBlind() && raiseValue + game.getTableBet() - players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted() <= players.get(game.getTable().getFocusedPlayer()).getChips())
                 game.raise(raiseValue);
                 // Se for -1, é all-in
             else if (raiseValue == -1)
-                game.raise(players.get(game.getTable().getFocusedPlayer()).getChips()-players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted());
+                game.raise(players.get(game.getTable().getFocusedPlayer()).getChips() - players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted());
                 // Senão, é um valor inválido e exibe um AlertDialog
             else
                 new AlertDialog.Builder(this)
@@ -119,30 +117,24 @@ public class GameActivity extends AppCompatActivity {
         });
 
         // Faz o bind de todas as views e configura seus valores
-        for(int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             seatViewsMap.put(i, new SeatViews());
             seatViewsMap.get(i).edtxtPlayerName = findViewById(getResources().getIdentifier("seat_" + String.valueOf(i), "id", getPackageName()));
             seatViewsMap.get(i).txtChipsTotal = findViewById(getResources().getIdentifier("txt_chips_" + String.valueOf(i), "id", getPackageName()));
             seatViewsMap.get(i).txtRoundChipsBetted = findViewById(getResources().getIdentifier("txt_bet_" + String.valueOf(i), "id", getPackageName()));
             seatViewsMap.get(i).txtRoundRole = findViewById(getResources().getIdentifier("txt_role_" + String.valueOf(i), "id", getPackageName()));
-            if(players.get(i) != null)
-            {
+            if (players.get(i) != null) {
                 seatViewsMap.get(i).edtxtPlayerName.setText((CharSequence) players.get(i).getName());
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
             }
             int finalI = i;
             seatViewsMap.get(i).edtxtPlayerName.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
-                    if(!winners.contains(finalI))
-                    {
+                public void onClick(View v) {
+                    if (!winners.contains(finalI)) {
                         winners.add(finalI);
                         seatViewsMap.get(finalI).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.checked));
-                    }
-                    else
-                    {
+                    } else {
                         winners.remove((Object) finalI);
                         seatViewsMap.get(finalI).edtxtPlayerName.setBackgroundTintList(null);
                     }
@@ -152,10 +144,8 @@ public class GameActivity extends AppCompatActivity {
         btnConfirm = findViewById(R.id.btn_confirm);
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if(winners.size() < 1)
-                {
+            public void onClick(View v) {
+                if (winners.size() < 1) {
                     Toast.makeText(GameActivity.this, "Selecione ao menos um vencedor", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -164,8 +154,7 @@ public class GameActivity extends AppCompatActivity {
                 btnConfirm.setEnabled(false);
                 btnConfirm.setVisibility(View.INVISIBLE);
                 ArrayList<Integer> validPlayers = game.getTable().getValidPlayers();
-                for(int validPlayer : validPlayers)
-                {
+                for (int validPlayer : validPlayers) {
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(false);
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setEnabled(false);
                 }
@@ -180,20 +169,17 @@ public class GameActivity extends AppCompatActivity {
 
         updateGameActivity();
     }
-    
+
     // Atualiza as informações das views a cada call/check, fold ou raise
-    private void updateGameActivity()
-    {
+    private void updateGameActivity() {
         int pot = 0;
         int playerCount = 0;
         // Atualiza as informações de todos os jogadores
-        for(int i = 0; i < 10; i++)
-        {
-            if(players.get(i) != null)
-            {
+        for (int i = 0; i < 10; i++) {
+            if (players.get(i) != null) {
                 pot += players.get(i).getRoundChipsBetted();
                 playerCount++;
-                
+
                 seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
                 seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
                 seatViewsMap.get(i).txtRoundRole.setText("");
@@ -208,25 +194,20 @@ public class GameActivity extends AppCompatActivity {
         // Se só tiver dois jogadores, o update deve operar de modo diferente:
         // O Dealer/BigBlind recebe a role D/B
         // E o SmallBlind continua igual
-        if(playerCount > 2)
-        {
+        if (playerCount > 2) {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
             seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
-        }
-        else
-        {
+        } else {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.DealerBB);
         }
-            
+
         seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
-        
+
         // Atualiza as cartas
-        if(game.getCards() > 0)
-        {
+        if (game.getCards() > 0) {
             // Indica o fim da mão
-            if(game.getCards() > 5)
-            {
+            if (game.getCards() > 5) {
                 Toast.makeText(GameActivity.this, "Selecione o(s) vencedor(es) dessa mão", Toast.LENGTH_LONG).show();
                 btnConfirm.setEnabled(true);
                 btnConfirm.setVisibility(View.VISIBLE);
@@ -237,34 +218,31 @@ public class GameActivity extends AppCompatActivity {
                 btnRaise.setEnabled(false);
                 btnFold.setEnabled(false);
 
-                for(int validPlayer : validPlayers)
-                {
+                for (int validPlayer : validPlayers) {
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(true);
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setEnabled(true);
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setKeyListener(null);
                 }
-            }
-            else
+            } else
                 for (int i = 0; i < game.getCards(); i++)
                     this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
         }
-        
+
         // Verifica se a ação é call ou check
         Player currentPlayer = players.get(game.getTable().getFocusedPlayer());
         Button btnCallCheck = (Button) findViewById(R.id.btn_check_call);
         if (currentPlayer.getRoundChipsBetted() == game.getTableBet()) {
             btnCallCheck.setText(R.string.check);
             btnCallCheck.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.checked));
-        }
-        else {
+        } else {
             btnCallCheck.setText(R.string.call);
             btnCallCheck.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.call));
         }
 
         // Texto de pagamento
         TextView txtToPay = (TextView) findViewById(R.id.txtToPay);
-        txtToPay.setText("To Pay:\n" + String.valueOf(game.getTableBet()-currentPlayer.getRoundChipsBetted()));
-        
+        txtToPay.setText("To Pay:\n" + String.valueOf(game.getTableBet() - currentPlayer.getRoundChipsBetted()));
+
         // Texto do pot
         TextView txtPot = (TextView) findViewById(R.id.txt_pot);
         txtPot.setText("Pot: " + String.valueOf(game.getPot() + pot));
@@ -274,16 +252,13 @@ public class GameActivity extends AppCompatActivity {
         txtHands.setText("Hands: " + String.valueOf(game.getHandsCount()));
     }
 
-    private void nextHandGameActivity()
-    {
+    private void nextHandGameActivity() {
         game.nextHand(winners);
 
-        for(int i = 0; i < 10; i++)
-        {
+        for (int i = 0; i < 10; i++) {
             Player player = players.get(i);
 
-            if(player == null)
-            {
+            if (player == null) {
                 seatViewsMap.get(i).edtxtPlayerName.setText("");
                 seatViewsMap.get(i).txtChipsTotal.setText("0");
                 seatViewsMap.get(i).txtRoundChipsBetted.setText("0");
@@ -292,8 +267,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < 5; i++)
-        {
+        for (int i = 0; i < 5; i++) {
             this.cards.get(i).setImageResource(R.drawable.back_card);
         }
 
@@ -301,19 +275,19 @@ public class GameActivity extends AppCompatActivity {
 
         updateGameActivity();
     }
-    
+
     // Ações de call
-    private void call () {
+    private void call() {
         game.call();
         updateGameActivity();
     }
-    
+
     // Ações de fold
-    private void fold () {
+    private void fold() {
         game.fold();
         updateGameActivity();
     }
-    
+
     // Ações de raise
     private void raise() {
         // Exibir um pop-up para o usuário digitar o valor do raise
