@@ -25,24 +25,16 @@ public class EndActivity extends AppCompatActivity {
         if (null != getIntent().getExtras())
             playerName = (String) getIntent().getSerializableExtra("playerName");
         
-        long sleepytime = 500;
         Button btn_restart = findViewById(R.id.btn_restart_game);
-        ImageView easter_egg = findViewById(R.id.easter);
         TextView txt_winner_name = findViewById(R.id.txt_winner);
         txt_winner_name.setText(playerName);
 
-
+        // Botão para reiniciar o jogo
         btn_restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                easter_egg.setVisibility(View.VISIBLE);
-                try {
-                    Thread.sleep(sleepytime);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                easter_egg.setVisibility(View.INVISIBLE);
                 startActivity(new Intent(EndActivity.this, MainActivity.class));
+                finish();
             }
         });
     }

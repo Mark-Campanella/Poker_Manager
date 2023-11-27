@@ -21,12 +21,19 @@ import java.util.Collections;
 import java.util.Hashtable;
 
 public class GameActivity extends AppCompatActivity {
+    // Hashtable para armazenar as views de cada assento
     private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<>(10);
+    // Objeto Game
     private Game game;
+    // Array de jogadores
     private ArrayList<Player> players;
+    // Array de cartas
     private ArrayList<ImageView> cards;
+    // Array de vencedores
     private ArrayList<Integer> winners;
+    // Botão de confirmar vencedores
     private AppCompatImageButton btnConfirm;
+    // Botões de controle
     private Button btnCheckCall;
     private Button btnFold;
     private Button btnRaise;
@@ -41,7 +48,8 @@ public class GameActivity extends AppCompatActivity {
         if (null != getIntent().getExtras()) {
             game = (Game) getIntent().getSerializableExtra("game");
         }
-
+        
+        // Recuperando a array de jogadores
         players = game.getTable().getPlayers();
 
         // Inicializa a array de cartas
@@ -50,12 +58,11 @@ public class GameActivity extends AppCompatActivity {
             cards.set(i, findViewById(getResources().getIdentifier("card_" + i, "id", getPackageName())));
         }
 
+        // Inicializa a atividade
         startGameActivity();
-
-        //
+        
+        // Inicializa a array de vencedores
         winners = new ArrayList<>();
-
-        //
 
         // Botão de call ou check
         btnCheckCall = findViewById(R.id.btn_check_call);
@@ -79,6 +86,7 @@ public class GameActivity extends AppCompatActivity {
     // Inicializa as informações das views
     @SuppressLint({"UseCompatLoadingForColorStateLists", "WrongViewCast", "DiscouragedApi"})
     private void startGameActivity() {
+        // Inicializa o jogo
         game.startGame();
 
         // Inicializa a array de cartas
@@ -119,6 +127,7 @@ public class GameActivity extends AppCompatActivity {
                 seatViewsMap.get(i).txtChipsTotal.setText(String.valueOf(players.get(i).getChips()));
             }
             int finalI = i;
+            // Ao clicar no nome do jogador, ele é selecionado como vencedor
             seatViewsMap.get(i).edtxtPlayerName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -132,18 +141,21 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
         }
+        // Botão de confirmar vencedores
         btnConfirm = findViewById(R.id.btn_confirm);
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Se não houver vencedores, exibir um Toast e retornar
                 if (1 > winners.size()) {
                     Toast.makeText(GameActivity.this, "Selecione ao menos um vencedor", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-
+                
+                // Desabilitando o botão de confirmar vencedores
                 btnConfirm.setEnabled(false);
                 btnConfirm.setVisibility(View.INVISIBLE);
+                // Pegando os nomes dos jogadores válidos
                 ArrayList<Integer> validPlayers = game.getTable().getValidPlayers();
                 for (int validPlayer : validPlayers) {
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(false);
@@ -154,25 +166,37 @@ public class GameActivity extends AppCompatActivity {
                 btnRaise.setEnabled(true);
                 btnFold.setEnabled(true);
 
+                // Chamar o método nextHand da classe Game para iniciar a próxima mão
                 nextHandGameActivity();
             }
         });
 
+        // Atualiza as informações das views
         updateGameActivity();
     }
 
     // Atualiza as informações das views a cada call/check, fold ou raise
     private void updateGameActivity() {
+        // Variáveis auxiliares
+        // Variável para armazenar o valor conjunto das apostas dos jogadores
         int pot = 0;
+        // Variável para armazenar o número de jogadores
         int playerCount = 0;
-        int playersBalance = 0;
+        // Variável para armazenar o número de jogadores ativos
         int activePlayerCount = 0;
+        // Variável para armazenar o valor conjunto das fichas dos jogadores
+        int playersBalance = 0;
         // Atualiza as informações de todos os jogadores
         for (int i = 0; 10 > i; i++) {
+            // Se o jogador não existir, atualizar apenas o nome e as fichas
             if (null != players.get(i)) {
+                // Se o jogador estiver ativo, atualizar todas as informações
+                // Somar o valor das apostas dos jogadores
                 pot += players.get(i).getRoundChipsBetted();
+                // Incrementar o número de jogadores
                 playerCount++;
 
+                // Atualizar as informações de cada jogador
                 seatViewsMap.get(i).txtChipsTotal.setText(String.valueOf(players.get(i).getChips()));
                 seatViewsMap.get(i).txtRoundChipsBetted.setText(String.valueOf(players.get(i).getRoundChipsBetted()));
                 seatViewsMap.get(i).txtRoundRole.setText("");
@@ -180,7 +204,9 @@ public class GameActivity extends AppCompatActivity {
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.folded));
                 else {
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
+                    // Somar o valor das fichas dos jogadores
                     playersBalance += players.get(i).getChips();
+                    // Incrementar o número de jogadores ativos
                     activePlayerCount++;
                 }
             }
@@ -201,7 +227,6 @@ public class GameActivity extends AppCompatActivity {
         } else {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.DealerBB);
         }
-
         seatViewsMap.get(game.getTable().getSmallBlindID()).txtRoundRole.setText(R.string.role_small_blind);
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
 
@@ -212,21 +237,26 @@ public class GameActivity extends AppCompatActivity {
                 for (int i = 0; 5 > i; i++)
                     this.cards.get(i).setImageResource(R.drawable.back_card);
 
+                // Exibir um Toast para o usuário selecionar o(s) vencedor(es) da mão
                 Toast.makeText(GameActivity.this, "Selecione o(s) vencedor(es) dessa mão", Toast.LENGTH_LONG).show();
+                // Habilitando o botão de confirmar vencedores
                 btnConfirm.setEnabled(true);
                 btnConfirm.setVisibility(View.VISIBLE);
+                // Pegando os nomes dos jogadores válidos
                 ArrayList<Integer> validPlayers = game.getTable().getValidPlayers();
                 seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(null);
                 //Desabilitando os botões de controle (call, raise e fold)
                 btnCheckCall.setEnabled(false);
                 btnRaise.setEnabled(false);
                 btnFold.setEnabled(false);
-
+                
+                // Habilitando a edição dos nomes dos jogadores válidos
                 for (int validPlayer : validPlayers) {
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setClickable(true);
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setEnabled(true);
                     seatViewsMap.get(validPlayer).edtxtPlayerName.setKeyListener(null);
                 }
+                // Se a hand não houver terminado, virar as cartas
             } else
                 for (int i = 0; i < game.getCards(); i++)
                     this.cards.get(i).setImageResource(R.drawable.carta_espadas_vector);
@@ -256,6 +286,7 @@ public class GameActivity extends AppCompatActivity {
         txtHands.setText("Hands: " + game.getHandsCount());
     }
 
+    // Chama o método nextHand da classe Game para iniciar a próxima mão
     private void nextHandGameActivity() {
         // Se não houver mais mãos, chamar a activity de fim de jogo e passar o vencedor
         if (!game.nextHand(winners)) {
@@ -264,17 +295,15 @@ public class GameActivity extends AppCompatActivity {
             for (int i = 0; 10 > i; i++)
                 if (null != players.get(i) && (null == winner || players.get(i).getChips() > winner.getChips()))
                     winner = players.get(i);
-            
-            String winnerName = winner.getName();
 
             // Chamar a activity de fim de jogo, passando o nome do vencedor e encerrando a activity atual
-            startActivity(new Intent(GameActivity.this, EndActivity.class).putExtra("playerName", (String) winnerName));
+            startActivity(new Intent(GameActivity.this, EndActivity.class).putExtra("playerName", winner.getName()));
             finish();
         }
 
+        // Limpar as informações das views se o jogador não existir
         for (int i = 0; 10 > i; i++) {
             Player player = players.get(i);
-
             if (null == player) {
                 seatViewsMap.get(i).edtxtPlayerName.setText("");
                 seatViewsMap.get(i).txtChipsTotal.setText("0");
@@ -284,12 +313,15 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        // Limpar as cartas
         for (int i = 0; 5 > i; i++) {
             this.cards.get(i).setImageResource(R.drawable.back_card);
         }
-
+        
+        // Limpar a array de vencedores
         winners.clear();
 
+        // Atualizar a activity
         updateGameActivity();
     }
 
@@ -312,6 +344,7 @@ public class GameActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "Raise");
     }
 
+    // Classe para armazenar as views de cada assento
     private class SeatViews {
         public EditText edtxtPlayerName;
         public TextView txtChipsTotal;

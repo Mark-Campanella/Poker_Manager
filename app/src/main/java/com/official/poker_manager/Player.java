@@ -68,11 +68,7 @@ public class Player implements Serializable {
     public String getName() {
         return name;
     }
-
-    public void setIsPlaying(boolean isPlaying) {
-        this.isPlaying = isPlaying;
-    }
-
+    
     public boolean isPlaying() {
         return this.isPlaying;
     }
@@ -94,6 +90,7 @@ public class Player implements Serializable {
         this.isFolded = true;
     }
 
+    // Retorna se o jogador está na rodada
     public boolean isFolded() {
         return this.isFolded;
     }
@@ -109,6 +106,7 @@ public class Player implements Serializable {
         }
     }
 
+    // Adiciona fichas ao jogador
     public void addChips(int amount) {
         this.chipsTotal += amount;
     }

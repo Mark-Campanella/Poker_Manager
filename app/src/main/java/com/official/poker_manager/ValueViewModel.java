@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+// ViewModel para guardar o valor do raise
 public class ValueViewModel extends ViewModel {
     private final MutableLiveData<Integer> value = new MutableLiveData<Integer>();
 
