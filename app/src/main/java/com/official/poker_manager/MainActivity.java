@@ -1,13 +1,13 @@
 package com.official.poker_manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     // Botão de iniciar o jogo
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
-        
+
         // Daqui para baixo, o código deixa a atividade em tela cheia
         // Retirado de https://stackoverflow.com/questions/21724420/how-to-hide-navigation-bar-permanently-in-android-activity
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         // This work only for android 4.4+
-        if(currentApiVersion >= Build.VERSION_CODES.KITKAT)
-        {
+        if (Build.VERSION_CODES.KITKAT <= currentApiVersion) {
             getWindow().getDecorView().setSystemUiVisibility(flags);
 
             // Code below is to handle presses of Volume up or Volume down.
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
                 @Override
                 public void onSystemUiVisibilityChange(int visibility) {
-                    if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    if (0 == (visibility & View.SYSTEM_UI_FLAG_FULLSCREEN)) {
                         decorView.setSystemUiVisibility(flags);
                     }
                 }
@@ -88,11 +87,9 @@ public class MainActivity extends AppCompatActivity {
     // Também retirado de https://stackoverflow.com/questions/21724420/how-to-hide-navigation-bar-permanently-in-android-activity
     @SuppressLint("NewApi")
     @Override
-    public void onWindowFocusChanged(boolean hasFocus)
-    {
+    public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
-        {
+        if (Build.VERSION_CODES.KITKAT <= currentApiVersion && hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

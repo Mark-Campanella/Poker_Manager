@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
     // Nome do jogador
-    private String name;
+    private final String name;
     // Total de fichas do jogador
     private int chipsTotal;
     // Quantidade de fichas apostadas pelo jogador na rodada atual
@@ -19,6 +19,18 @@ public class Player implements Serializable {
     private boolean isBigBlind;
     // Se o jogador saiu da rodada
     private boolean isFolded;
+
+    // Construtor
+    public Player(String name, int chipsTotal, boolean isPlaying) {
+        this.name = name;
+        this.chipsTotal = chipsTotal;
+        this.isPlaying = isPlaying;
+        this.roundChipsBetted = 0;
+        this.isDealer = false;
+        this.isSmallBlind = false;
+        this.isBigBlind = false;
+        this.isFolded = false;
+    }
 
     // Getters e Setters
     public int getChips() {
@@ -53,54 +65,51 @@ public class Player implements Serializable {
         isBigBlind = bigBlind;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setIsPlaying(boolean isPlaying) { this.isPlaying = isPlaying; }
+    public void setIsPlaying(boolean isPlaying) {
+        this.isPlaying = isPlaying;
+    }
 
-    public boolean isPlaying() { return this.isPlaying; }
-    
-    public int getRoundChipsBetted() { return this.roundChipsBetted; }
-    
+    public boolean isPlaying() {
+        return this.isPlaying;
+    }
+
+    public int getRoundChipsBetted() {
+        return this.roundChipsBetted;
+    }
+
     public void setRoundChipsBetted(int chips) {
         this.roundChipsBetted = chips;
     }
 
-    public void setIsFolded(boolean isFolded) { this.isFolded = isFolded; }
-
-    // Construtor
-    public Player(String name, int chipsTotal, boolean isPlaying) {
-        this.name = name;
-        this.chipsTotal = chipsTotal;
-        this.isPlaying = isPlaying;
-        this.roundChipsBetted = 0;
-        this.isDealer = false;
-        this.isSmallBlind = false;
-        this.isBigBlind = false;
-        this.isFolded = false;
+    public void setIsFolded(boolean isFolded) {
+        this.isFolded = isFolded;
     }
-    
-    // Tira o jogador da rodada
-    public void fold() { this.isFolded = true; }
 
-    public boolean isFolded() { return this.isFolded; }
-    
+    // Tira o jogador da rodada
+    public void fold() {
+        this.isFolded = true;
+    }
+
+    public boolean isFolded() {
+        return this.isFolded;
+    }
+
     // Aposta uma quantia
-    public void bet(int amount)
-    {
-        if(amount > this.chipsTotal)
-        {
+    public void bet(int amount) {
+        if (amount > this.chipsTotal) {
             this.roundChipsBetted += this.chipsTotal;
             this.chipsTotal -= this.chipsTotal;
-        }
-        else
-        {
+        } else {
             this.roundChipsBetted += amount;
             this.chipsTotal -= amount;
         }
     }
 
-    public void addChips(int amount)
-    {
+    public void addChips(int amount) {
         this.chipsTotal += amount;
     }
 }

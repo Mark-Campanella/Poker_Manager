@@ -4,12 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.EditText;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.widget.EditText;
 
 /*
 Boa parte do código foi extraída de: https://developer.android.com/develop/ui/views/components/dialogs
@@ -19,9 +18,10 @@ Fragmento que exibe um diálogo para o usuário digitar um valor
 */
 
 public class raiseDialog extends DialogFragment {
-    
+
     // ViewModel para passar o valor digitado pelo usuário
     private ValueViewModel viewModel;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -64,7 +64,7 @@ public class raiseDialog extends DialogFragment {
                         raiseDialog.this.getDialog().cancel();
                     }
                 });
-        
+
         // Create the AlertDialog object and return it.
         return builder.create();
     }

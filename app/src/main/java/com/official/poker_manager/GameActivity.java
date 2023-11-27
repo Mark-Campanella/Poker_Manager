@@ -1,53 +1,44 @@
 package com.official.poker_manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 
 public class GameActivity extends AppCompatActivity {
+    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<>(10);
     private Game game;
     private ArrayList<Player> players;
     private ArrayList<ImageView> cards;
-    private final Hashtable<Integer, SeatViews> seatViewsMap = new Hashtable<>(10);
     private ArrayList<Integer> winners;
-    private ValueViewModel viewModel;
-
-    private class SeatViews {
-        public EditText edtxtPlayerName;
-        public TextView txtChipsTotal;
-        public TextView txtRoundChipsBetted;
-        public TextView txtRoundRole;
-    }
-
     private AppCompatImageButton btnConfirm;
     private Button btnCheckCall;
     private Button btnFold;
     private Button btnRaise;
 
+    @SuppressLint("DiscouragedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
         // Recuperando o objeto Game criado em SetupActivity
-        if (getIntent().getExtras() != null) {
+        if (null != getIntent().getExtras()) {
             game = (Game) getIntent().getSerializableExtra("game");
         }
 
@@ -55,8 +46,8 @@ public class GameActivity extends AppCompatActivity {
 
         // Inicializa a array de cartas
         cards = new ArrayList<ImageView>(Collections.nCopies(5, null));
-        for (int i = 0; i < 5; i++) {
-            cards.set(i, (ImageView) findViewById(getResources().getIdentifier("card_" + String.valueOf(i), "id", getPackageName())));
+        for (int i = 0; 5 > i; i++) {
+            cards.set(i, findViewById(getResources().getIdentifier("card_" + i, "id", getPackageName())));
         }
 
         startGameActivity();
@@ -86,25 +77,25 @@ public class GameActivity extends AppCompatActivity {
     }
 
     // Inicializa as informações das views
-    @SuppressLint({"UseCompatLoadingForColorStateLists", "WrongViewCast"})
+    @SuppressLint({"UseCompatLoadingForColorStateLists", "WrongViewCast", "DiscouragedApi"})
     private void startGameActivity() {
         game.startGame();
 
         // Inicializa a array de cartas
         cards = new ArrayList<ImageView>(Collections.nCopies(5, null));
-        for (int i = 0; i < 5; i++) {
-            cards.set(i, (ImageView) findViewById(getResources().getIdentifier("card_" + String.valueOf(i), "id", getPackageName())));
+        for (int i = 0; 5 > i; i++) {
+            cards.set(i, findViewById(getResources().getIdentifier("card_" + i, "id", getPackageName())));
         }
 
         // Inicializa a ViewModel usada em raise
-        viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
+        ValueViewModel viewModel = new ViewModelProvider(this).get(ValueViewModel.class);
         viewModel.getValue().observe(this, value -> {
             int raiseValue = value.intValue();
             // Se o valor do raise for válido, chamar o método raise (entre aposta da mesa+1 e all-in)
             if (raiseValue >= this.game.getBlind() && raiseValue + game.getTableBet() - players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted() <= players.get(game.getTable().getFocusedPlayer()).getChips())
                 game.raise(raiseValue);
                 // Se for -1, é all-in
-            else if (raiseValue == -1)
+            else if (-1 == raiseValue)
                 game.raise(players.get(game.getTable().getFocusedPlayer()).getChips() - players.get(game.getTable().getFocusedPlayer()).getRoundChipsBetted());
                 // Senão, é um valor inválido e exibe um AlertDialog
             else
@@ -117,15 +108,15 @@ public class GameActivity extends AppCompatActivity {
         });
 
         // Faz o bind de todas as views e configura seus valores
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; 10 > i; i++) {
             seatViewsMap.put(i, new SeatViews());
-            seatViewsMap.get(i).edtxtPlayerName = findViewById(getResources().getIdentifier("seat_" + String.valueOf(i), "id", getPackageName()));
-            seatViewsMap.get(i).txtChipsTotal = findViewById(getResources().getIdentifier("txt_chips_" + String.valueOf(i), "id", getPackageName()));
-            seatViewsMap.get(i).txtRoundChipsBetted = findViewById(getResources().getIdentifier("txt_bet_" + String.valueOf(i), "id", getPackageName()));
-            seatViewsMap.get(i).txtRoundRole = findViewById(getResources().getIdentifier("txt_role_" + String.valueOf(i), "id", getPackageName()));
-            if (players.get(i) != null) {
-                seatViewsMap.get(i).edtxtPlayerName.setText((CharSequence) players.get(i).getName());
-                seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
+            seatViewsMap.get(i).edtxtPlayerName = findViewById(getResources().getIdentifier("seat_" + i, "id", getPackageName()));
+            seatViewsMap.get(i).txtChipsTotal = findViewById(getResources().getIdentifier("txt_chips_" + i, "id", getPackageName()));
+            seatViewsMap.get(i).txtRoundChipsBetted = findViewById(getResources().getIdentifier("txt_bet_" + i, "id", getPackageName()));
+            seatViewsMap.get(i).txtRoundRole = findViewById(getResources().getIdentifier("txt_role_" + i, "id", getPackageName()));
+            if (null != players.get(i)) {
+                seatViewsMap.get(i).edtxtPlayerName.setText(players.get(i).getName());
+                seatViewsMap.get(i).txtChipsTotal.setText(String.valueOf(players.get(i).getChips()));
             }
             int finalI = i;
             seatViewsMap.get(i).edtxtPlayerName.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +136,7 @@ public class GameActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (winners.size() < 1) {
+                if (1 > winners.size()) {
                     Toast.makeText(GameActivity.this, "Selecione ao menos um vencedor", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -177,26 +168,26 @@ public class GameActivity extends AppCompatActivity {
         int playersBalance = 0;
         int activePlayerCount = 0;
         // Atualiza as informações de todos os jogadores
-        for (int i = 0; i < 10; i++) {
-            if (players.get(i) != null) {
+        for (int i = 0; 10 > i; i++) {
+            if (null != players.get(i)) {
                 pot += players.get(i).getRoundChipsBetted();
                 playerCount++;
 
-                seatViewsMap.get(i).txtChipsTotal.setText((CharSequence) String.valueOf(players.get(i).getChips()));
-                seatViewsMap.get(i).txtRoundChipsBetted.setText((CharSequence) String.valueOf(players.get(i).getRoundChipsBetted()));
+                seatViewsMap.get(i).txtChipsTotal.setText(String.valueOf(players.get(i).getChips()));
+                seatViewsMap.get(i).txtRoundChipsBetted.setText(String.valueOf(players.get(i).getRoundChipsBetted()));
                 seatViewsMap.get(i).txtRoundRole.setText("");
                 if (players.get(i).isFolded())
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.folded));
-                else{
+                else {
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
                     playersBalance += players.get(i).getChips();
                     activePlayerCount++;
                 }
             }
         }
-        
+
         // Condições de "vitória imediata"
-        if (playersBalance == 0 || activePlayerCount == 1) {
+        if (0 == playersBalance || 1 == activePlayerCount) {
             game.setCards(6);
         }
 
@@ -204,7 +195,7 @@ public class GameActivity extends AppCompatActivity {
         // Se só tiver dois jogadores, o update deve operar de modo diferente:
         // O Dealer/BigBlind recebe a role D/B
         // E o SmallBlind continua igual
-        if (playerCount > 2) {
+        if (2 < playerCount) {
             seatViewsMap.get(game.getTable().getDealerID()).txtRoundRole.setText(R.string.role_dealer);
             seatViewsMap.get(game.getTable().getBigBlindID()).txtRoundRole.setText(R.string.role_big_blind);
         } else {
@@ -215,12 +206,12 @@ public class GameActivity extends AppCompatActivity {
         seatViewsMap.get(game.getTable().getFocusedPlayer()).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.turn));
 
         // Atualiza as cartas
-        if (game.getCards() > 0) {
+        if (0 < game.getCards()) {
             // Indica o fim da mão
-            if (game.getCards() > 5) {
-                for (int i = 0; i < 5; i++)
+            if (5 < game.getCards()) {
+                for (int i = 0; 5 > i; i++)
                     this.cards.get(i).setImageResource(R.drawable.back_card);
-                
+
                 Toast.makeText(GameActivity.this, "Selecione o(s) vencedor(es) dessa mão", Toast.LENGTH_LONG).show();
                 btnConfirm.setEnabled(true);
                 btnConfirm.setVisibility(View.VISIBLE);
@@ -243,7 +234,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Verifica se a ação é call ou check
         Player currentPlayer = players.get(game.getTable().getFocusedPlayer());
-        Button btnCallCheck = (Button) findViewById(R.id.btn_check_call);
+        Button btnCallCheck = findViewById(R.id.btn_check_call);
         if (currentPlayer.getRoundChipsBetted() == game.getTableBet()) {
             btnCallCheck.setText(R.string.check);
             btnCallCheck.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.checked));
@@ -253,25 +244,38 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // Texto de pagamento
-        TextView txtToPay = (TextView) findViewById(R.id.txtToPay);
-        txtToPay.setText("To Pay:\n" + String.valueOf(game.getTableBet() - currentPlayer.getRoundChipsBetted()));
+        TextView txtToPay = findViewById(R.id.txtToPay);
+        txtToPay.setText("To Pay:\n" + (game.getTableBet() - currentPlayer.getRoundChipsBetted()));
 
         // Texto do pot
-        TextView txtPot = (TextView) findViewById(R.id.txt_pot);
-        txtPot.setText("Pot: " + String.valueOf(game.getPot() + pot));
+        TextView txtPot = findViewById(R.id.txt_pot);
+        txtPot.setText("Pot: " + (game.getPot() + pot));
 
         // Texto de hands
-        TextView txtHands = (TextView) findViewById(R.id.txt_hands);
-        txtHands.setText("Hands: " + String.valueOf(game.getHandsCount()));
+        TextView txtHands = findViewById(R.id.txt_hands);
+        txtHands.setText("Hands: " + game.getHandsCount());
     }
 
     private void nextHandGameActivity() {
-        game.nextHand(winners);
+        // Se não houver mais mãos, chamar a activity de fim de jogo e passar o vencedor
+        if (!game.nextHand(winners)) {
+            // Determinar o vencedor
+            Player winner = null;
+            for (int i = 0; 10 > i; i++)
+                if (null != players.get(i) && (null == winner || players.get(i).getChips() > winner.getChips()))
+                    winner = players.get(i);
+            
+            String winnerName = winner.getName();
 
-        for (int i = 0; i < 10; i++) {
+            // Chamar a activity de fim de jogo, passando o nome do vencedor e encerrando a activity atual
+            startActivity(new Intent(GameActivity.this, EndActivity.class).putExtra("playerName", winnerName));
+            finish();
+        }
+
+        for (int i = 0; 10 > i; i++) {
             Player player = players.get(i);
 
-            if (player == null) {
+            if (null == player) {
                 seatViewsMap.get(i).edtxtPlayerName.setText("");
                 seatViewsMap.get(i).txtChipsTotal.setText("0");
                 seatViewsMap.get(i).txtRoundChipsBetted.setText("0");
@@ -280,7 +284,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; 5 > i; i++) {
             this.cards.get(i).setImageResource(R.drawable.back_card);
         }
 
@@ -306,5 +310,12 @@ public class GameActivity extends AppCompatActivity {
         // Exibir um pop-up para o usuário digitar o valor do raise
         DialogFragment dialog = new raiseDialog();
         dialog.show(getSupportFragmentManager(), "Raise");
+    }
+
+    private class SeatViews {
+        public EditText edtxtPlayerName;
+        public TextView txtChipsTotal;
+        public TextView txtRoundChipsBetted;
+        public TextView txtRoundRole;
     }
 }
