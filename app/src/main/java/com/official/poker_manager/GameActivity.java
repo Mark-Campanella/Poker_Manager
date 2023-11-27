@@ -174,6 +174,7 @@ public class GameActivity extends AppCompatActivity {
     private void updateGameActivity() {
         int pot = 0;
         int playerCount = 0;
+        int playersBalance = 0;
         // Atualiza as informações de todos os jogadores
         for (int i = 0; i < 10; i++) {
             if (players.get(i) != null) {
@@ -185,9 +186,16 @@ public class GameActivity extends AppCompatActivity {
                 seatViewsMap.get(i).txtRoundRole.setText("");
                 if (players.get(i).isFolded())
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(getApplicationContext().getResources().getColorStateList(R.color.folded));
-                else
+                else{
                     seatViewsMap.get(i).edtxtPlayerName.setBackgroundTintList(null);
+                    playersBalance += players.get(i).getChips();
+                }
             }
+        }
+        
+        // Se todos os jogadores deram all-in
+        if (playersBalance == 0) {
+            game.setCards(6);
         }
 
         // Atualiza as informações de quem é o dealer, small blind, big blind e de quem é a vez
@@ -208,6 +216,9 @@ public class GameActivity extends AppCompatActivity {
         if (game.getCards() > 0) {
             // Indica o fim da mão
             if (game.getCards() > 5) {
+                for (int i = 0; i < 5; i++)
+                    this.cards.get(i).setImageResource(R.drawable.back_card);
+                
                 Toast.makeText(GameActivity.this, "Selecione o(s) vencedor(es) dessa mão", Toast.LENGTH_LONG).show();
                 btnConfirm.setEnabled(true);
                 btnConfirm.setVisibility(View.VISIBLE);

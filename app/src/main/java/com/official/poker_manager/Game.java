@@ -166,6 +166,10 @@ public class Game implements Serializable
     public int getCards() {
         return cards;
     }
+    
+    public void setCards(int cards) {
+        this.cards = cards;
+    }
 
     public int getBlind() {
         return blind;
